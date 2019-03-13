@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Service U Need</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">		
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+
+<body>
+<!-- header.php -->
+
+	<?php require_once 'body/header.php' ?>
+
+<!-- main.php -->
+<main>
+	<?php require_once 'body/main.php' ?>
+</main>
+<!-- footer.php -->
+<footer>
+	<?php require_once 'body/footer.php' ?>
+</footer>
+</body>
+</html>
