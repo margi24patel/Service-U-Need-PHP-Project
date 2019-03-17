@@ -7,7 +7,7 @@
 			<div></div>
 			<div class="deep-wrapper">
 				<div id="Blog">
-					<div class="box"><a href="pages/blogs/index.php">Blogs</a></div>
+					<div class="box"><a href="http://localhost/Service-U-Need/pages/blogs/index.php">Blogs</a></div>
 				</div>
 				<div id="#Professional">
 					<div class="box"><a href="#">Become A Professional</a></div>

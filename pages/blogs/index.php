@@ -8,15 +8,16 @@
 
 <body>
 <!-- header.php -->
-	<?php require_once './body/header.php' ?>
+
+	<?php require_once 'body/header.php' ?>
 
 <!-- main.php -->
 
-	<?php require_once './body/main.php' ?>
+	<?php require_once 'listblogs.php' ?>
 
 <!-- footer.php -->
 
-	<?php require_once './body/footer.php' ?>
+	<?php require_once 'body/footer.php' ?>
 
 </body>
 </html>

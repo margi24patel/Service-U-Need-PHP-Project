@@ -101,33 +101,83 @@ header{
 	background-color: orange;
 	color:black;
 }
-.menu-wrapper{
-	display: grid;
-	grid-template-columns: 220px 220px 220px 220px 220px;
-	grid-gap: 15px;
-	background-color: #fff;
-	padding: 20px;
-}
-.menu-box{
-	background-color: silver;
-  	border-radius: 5px;
-  	padding: 20px;
-  	font-size: 100%;	
-	text-align: center; 
-	cursor: pointer; 
-}
-.menu-box a{
-	text-decoration: none;
-	color:black;
-}
-.menu-box:hover{
-	background-color: orange;
-	color:black;
-}
+
 /* MAIN */
 /* ADD YOUR MAIN CSS HERE. MAKE SURE NOT TO CHANGE ANYTHING IN HEADER AND
 	 FOOTER SECTION */
-
+	 main{
+		border-bottom: 1px solid black;
+	}
+	.menu-wrapper{
+		display: grid;
+		grid-template-columns: 220px 220px 220px 220px 220px;
+		grid-gap: 15px;
+		background-color: #fff;
+		padding: 20px;
+	}
+	.menu-box{
+		background-color: silver;
+			border-radius: 5px;
+			padding: 20px;
+			font-size: 100%;	
+		text-align: center; 
+		cursor: pointer; 
+	}
+	.menu-box a{
+		text-decoration: none;
+		color:black;
+	}
+	.menu-box:hover{
+		background-color: orange;
+		color:black;
+	}
+	.banner img{
+		width: 1200px;
+		height: 400px;
+		opacity: 0.8;
+	}
+	/* MAIN SECTION */
+	.section-wrapper{
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-gap: 10px;
+		background-color: #fff;
+		padding: 20px;
+	}
+	.section-box{
+		background-color: #444;
+			border-radius: 5px;
+			padding: 20px;
+			font-size: 150%;	
+		text-align: center; 
+	}
+	/* MAIN BLOG SECTION */
+	.blog-section, .review-section{
+		text-align: center;
+	}
+	#blog-grid, #review-grid{
+		display: grid;
+		grid-template-columns: 300px auto;
+		border: 2px solid black;
+		margin:10px;
+	}
+	.blog-design, .review-design{
+		border: 2px solid black;
+		margin: 10px;
+	}
+	.blog-content{
+		grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-start: 2;
+		grid-column-end: 3;
+		text-align: left;
+		padding-left:20px;
+	}
+	
+	
+	.blog-design img{
+		width:100%;
+	}
 	 
 /* FOOTER */
 .menu1 {
