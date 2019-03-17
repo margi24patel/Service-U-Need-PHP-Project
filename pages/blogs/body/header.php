@@ -1,3 +1,15 @@
+<?php
+	require_once 'C:\xampp\htdocs\Service-U-Need\menu\Database.php';
+	require_once 'C:\xampp\htdocs\Service-U-Need\menu\Menu.php';
+
+	$dbcon = Database::getDb();
+
+	$b = new Menu();
+
+	$mymenu = $b->getAllMenus(Database::getDb());
+
+?>
+
 <header>
 	<nav>
 		<div class="wrapper">
@@ -7,7 +19,7 @@
 			<div></div>
 			<div class="deep-wrapper">
 				<div id="Blog">
-					<div class="box"><a href="#">Blogs</a></div>
+					<div class="box"><a href="pages/blogs/index.php">Blogs</a></div>
 				</div>
 				<div id="#Professional">
 					<div class="box"><a href="#">Become A Professional</a></div>
@@ -26,11 +38,11 @@
 	</nav>
 	<nav>
 		<div class="menu-wrapper">
-			<div class="menu-box"><a href="#">Home Cleaning &amp; Repair</a></div>
-			<div class="menu-box"><a href="#">Appliance Repair</a></div>
-			<div class="menu-box"><a href="#">Business &amp; Technology</a></div>
-			<div class="menu-box"><a href="#">Technology</a></div>
-			<div class="menu-box"><a href="#">Beauty</a></div>
+		<?php foreach($mymenu as $menu){
+		echo "" . 
+			"<div class='menu-box'><a href='#'>" . $menu->name . "</a></div>" ;
+		}
+		?>
 		</div>
 	</nav>		
 </header>

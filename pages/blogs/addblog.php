@@ -1,5 +1,5 @@
 <?php
-	require_once 'database.php';
+	require_once 'BlogDatabase.php';
 	require_once 'Blog.php';
 		if(isset($_POST['addblog'])){
 			$title = $_POST['title'];

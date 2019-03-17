@@ -1,3 +1,15 @@
+<?php
+	require_once 'menu/Database.php';
+	require_once 'menu/Menu.php';
+
+	$dbcon = Database::getDb();
+
+	$b = new Menu();
+
+	$mymenu = $b->getAllMenus(Database::getDb());
+
+?>
+
 <header>
 	<nav>
 		<div class="wrapper">
@@ -26,11 +38,11 @@
 	</nav>
 	<nav>
 		<div class="menu-wrapper">
-			<div class="menu-box"><a href="#">Home Cleaning &amp; Repair</a></div>
-			<div class="menu-box"><a href="#">Appliance Repair</a></div>
-			<div class="menu-box"><a href="#">Business &amp; Technology</a></div>
-			<div class="menu-box"><a href="#">Technology</a></div>
-			<div class="menu-box"><a href="#">Beauty</a></div>
+		<?php foreach($mymenu as $menu){
+		echo "" . 
+			"<div class='menu-box'><a href='#'>" . $menu->name . "</a></div>" ;
+		}
+		?>
 		</div>
 	</nav>		
 </header>

@@ -1,5 +1,5 @@
 <?php
-	require_once 'Database.php';
+	require_once 'BlogDatabase.php';
 	require_once 'Blog.php';
 
 	$dbcon = Database::getDb();
