@@ -8,7 +8,7 @@
 
 <body>
 <!-- header.php -->
-	<?php require_once './body/header.php' ?>
+	<?php require_once 'C:\xampp\htdocs\Service-U-Need\body\header.php' ?>
 
 <!-- main.php -->
 
@@ -16,7 +16,7 @@
 
 <!-- footer.php -->
 
-	<?php require_once './body/footer.php' ?>
+	<?php require_once 'C:\xampp\htdocs\Service-U-Need\body\footer.php' ?>
 
 </body>
 </html>
