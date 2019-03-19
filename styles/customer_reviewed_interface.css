@@ -1,0 +1,15 @@
+#customer_review_interface_main{
+     background-color: silver; 
+   padding-top:15px;
+   padding-left:5px;
+}
+#block{
+    
+    border: 2px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
