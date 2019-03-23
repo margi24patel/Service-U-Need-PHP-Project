@@ -10,7 +10,7 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min
 echo "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>";
 
 echo "<!-- Font Awesome -->
-          <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>";
+     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>";
      
     //Margi - Custom files
 echo "<link rel='stylesheet' href='styles/listjobpositions_admin.css'>";
@@ -24,136 +24,69 @@ echo "<link rel='stylesheet' type='text/css' href='styles/style.css'>";
 
 <!-- main -->
 <main id="listofjobpositions_admin_main">
-<div class="container">
+
 
   <h1>Positions</h1>
-<form class="form-horizontal" action="">    
-    
 <!-- Html part -->
 
     
-<div class="container-fluid">
+ <div class="container-fluid">
+   <div class="row">
+       
+    
+<?php
 
-    <div class="row">
+    require_once 'database/career/DatabaseEmployeesCareer.php';
+    require_once 'database/career/JobPosition_admin.php';
 
-    <div class='col-sm-3 col-md-4'>
-        <div>
-            <h4>Job Title</h4>
-        </div>
-        <div>
-            <p>Descrption</p>
-        </div>
-        <div class='delete-job'>
-            <input type='submit' name='delete' value='Delete Job Position' />
-        </div>
-        <div class='edit-job'>
-            <input type='submit' name='edit' value='Edit Job Position' />
-        </div>
-    </div>
-        
-    <div class='col-sm-3 col-md-4'>
-        <div>
-            <h4>Job Title</h4>
-        </div>
-        <div>
-            <p>Descrption</p>
-        </div>
-        <div class='delete-job'>
-            <input type='submit' name='delete' value='Delete Job Position' />
-        </div>
-        <div class='edit-job'>
-            <input type='submit' name='edit' value='Edit Job Position' />
-        </div>
-    </div>
-        
-    <div class='col-sm-3 col-md-4'>
-        <div>
-            <h4>Job Title</h4>
-        </div>
-        <div>
-            <p>Descrption</p>
-        </div>
-        <div class='delete-job'>
-            <input type='submit' name='delete' value='Delete Job Position' />
-        </div>
-        <div class='edit-job'>
-            <input type='submit' name='edit' value='Edit Job Position' />
-        </div>
-    </div>
-        
-    <div class='col-sm-3 col-md-4'>
-        <div>
-            <h4>Job Title</h4>
-        </div>
-        <div>
-            <p>Descrption</p>
-        </div>
-        <div class='delete-job'>
-            <input type='submit' name='delete' value='Delete Job Position' />
-        </div>
-        <div class='edit-job'>
-            <input type='submit' name='edit' value='Edit Job Position' />
-        </div>
-    </div>
-    
-        
-    <div class='col-sm-3 col-md-4'>
-        <div>
-            <h4>Job Title</h4>
-        </div>
-        <div>
-            <p>Descrption</p>
-        </div>
-        <div class='delete-job'>
-            <input type='submit' name='delete' value='Delete Job Position' />
-        </div>
-        <div class='edit-job'>
-            <input type='submit' name='edit' value='Edit Job Position' />
-        </div>
-    </div>
-        
-        
-        <div class='col-sm-3 col-md-4'>
-        <div>
-            <h4>Job Title</h4>
-        </div>
-        <div>
-            <p>Descrption</p>
-        </div>
-        <div class='delete-job'>
-            <input type='submit' name='delete' value='Delete Job Position' />
-        </div>
-        <div class='edit-job'>
-            <input type='submit' name='edit' value='Edit Job Position' />
-        </div>
-    </div>
-        
-        <div class='col-sm-3 col-md-4'>
-        <div>
-            <h4>Job Title</h4>
-        </div>
-        <div>
-            <p>Descrption</p>
-        </div>
-        <div class='delete-job'>
-            <input type='submit' name='delete' value='Delete Job Position' />
-        </div>
-        <div class='edit-job'>
-            <input type='submit' name='edit' value='Edit Job Position' />
-        </div>
-    </div>
-        
-    
-    </div>
-    
-        <div>
-          <div class='add-job'>
-            <input type='submit' name='add' value='Add Job Position' />
-          </div>  
-        </div>
-</div>
-</form>
-</div> 
+    $dbcon = DatabaseEmployeesCareer::getDb();
+    $j = new JobPosition_admin();
+    $myjobposition =  $j->getAllJobPositions(DatabaseEmployeesCareer::getDb());
+
+
+    foreach($myjobposition as $position)
+    {
+        echo   "<div class='col-sm-3 col-md-4'>" . 
+                "<h3>" . $position->job_title ."</h3>" . "<br>" . 
+                $position->location_name .  "<br>" .
+                $position->skill_requirements . "<br>". 
+                $position->job_requirements . "<br>". 
+                $position->description . "<br>" .
+                $position->salary . "<br>". 
+                $position->job_type .
+
+                //delete Button
+                "<div class='delete-job'>" .    
+                    "<form action='deletejobposition_admin.php' method='post' class='form-horizontal'>".
+                    "<input type='hidden' name = 'id' value='$position->id' />" .
+                    "<input type='submit' name='delete' value='Delete Job Position' />" .
+                    "</form>" .
+                "</div>" .
+
+                //edit Button
+                "<div class='edit-job'>" .   
+                    "<form action='editjobposition_admin.php' method='post' class='form-horizontal'>".
+                    "<input type='hidden' name = 'id' value='$position->id' />" .
+                    "<input type='submit' name='edit' value='Edit Job Position' />" .
+                    "</form>" .
+                "</div>" . 
+                "</div>";
+
+    }
+?>
+   </div>
+<?php
+        //add Job Postition Button
+echo      "<div class='add-job'>" .    
+                "<form action='addjobposition_admin.php' method='post' class='form-horizontal'>".
+                "<input type='hidden' name = 'id' value='$position->id' />" .
+                "<input type='submit' name='add' value='Add Job Postition' />" .
+                "</form>" .
+            
+          "</div>"; 
+?>
+
+ </div>
 </main>
 
 <!-- footer -->
