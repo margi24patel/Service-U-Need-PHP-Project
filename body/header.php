@@ -8,6 +8,7 @@
 
 	$mymenu = $b->getAllMenus(Database::getDb());
 
+
 ?>
 
 <header>
@@ -37,12 +38,33 @@
 		</div>
 	</nav>
 	<nav>
-		<div class="menu-wrapper">
-		<?php foreach($mymenu as $menu){
-		echo "" . 
-			"<div class='menu-box'><a href='#'>" . $menu->name . "</a></div>" ;
-		}
-		?>
+	<div class="menu-wrapper">
+	<?php $categories = array(); ?>
+		<?php foreach($mymenu as $menu) : ?>
+			 
+				<div class='menu-box'>
+					<button class='dropbtn'><?= $menu->name ?>  </button> 
+					<?php 
+						$s = new Submenu();
+
+						$mysubmenu = $s->getAllSubMenus(Database::getDb(),$menu->id);
+					 ?>
+					<?php foreach($mysubmenu as $submenu) : ?> 
+					
+					<?php $categories[] = $submenu->name; 
+					
+						$length = count($categories);	
+					?>
+
+					<?php for( $i = 0; $i < $length; $i++) : ?>
+					<div class='dropdown-content'>
+							<a href='#'><?= $categories[$i] ?></a>
+					</div>
+					<?php endfor; ?>
+          <?php endforeach; ?>
+					
+				</div> 
+				<?php endforeach; ?>
 		</div>
 	</nav>		
 </header>

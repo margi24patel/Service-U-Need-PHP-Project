@@ -25,14 +25,15 @@ if(isset($_POST['updateblog'])){
 	$first_name = $_POST['first_name'];
 	$last_name = $_POST['last_name'];
 	$publish_date = $_POST['publish_date'];
+	$content = $_POST['content'];
 
 	$db = Database::getDb();
 	$b = new Blog();
 
-	$count = $b->updateBlog($id,$title,$image_title,$image_url,$first_name,$last_name,$publish_date,$db);
+	$count = $b->updateBlog($id,$title,$image_title,$image_url,$first_name,$last_name,$publish_date,$content,$db);
 
 	if($count){
-		header('Location: listblogs.php');
+		header('Location: index.php');
 	}else{
 		echo "problem showing blog table values";
 	}
@@ -48,5 +49,6 @@ if(isset($_POST['updateblog'])){
     First Name: <input type="text" name="first_name" value="<?= $blog->first_name ?>"/><br />
     Last Name: <input type="text" name="last_name" value="<?= $blog->last_name ?>"/><br />
     Publish Date: <input type="text" name="publish_date" value="<?= $blog->publish_date ?>"/><br />
+		Content: <input type="text" name="content" value="<?= $blog->content ?>"/><br />
     <input type="submit" name="updateblog" value="Update Blog">
 </form>

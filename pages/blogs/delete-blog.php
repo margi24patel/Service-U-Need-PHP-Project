@@ -9,7 +9,7 @@
 		$b = new Blog();
 		$count = $b->deleteBlog($id,$db);
 		if($count){
-			echo "Blog Deleted";
+			header('Location: index.php');
 		}
 		else{
 			echo "There is a problem on deleting this blog";

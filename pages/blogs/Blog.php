@@ -38,14 +38,15 @@ class Blog{
 		return $count;
 	}
 
-	public function updateBlog($id,$title,$image_title,$image_url,$first_name,$last_name,$publish_date,$db){
+	public function updateBlog($id,$title,$image_title,$image_url,$first_name,$last_name,$publish_date,$content,$db){
 		$sql = "UPDATE blogs
 				SET title = :title,
 				image_title = :image_title,
 				image_url = :image_url,
 				first_name = :first_name,
 				last_name = :last_name,
-				publish_date = :publish_date
+				publish_date = :publish_date,
+				content = :content
 				WHERE id= :id";
 
 		$pst = $db->prepare($sql);
@@ -56,6 +57,7 @@ class Blog{
 		$pst->bindParam(':first_name', $first_name);
 		$pst->bindParam(':last_name', $last_name);
 		$pst->bindParam(':publish_date', $publish_date);
+		$pst->bindParam(':content', $content);
 		$pst->bindParam(':id', $id);
 
 		$count = $pst->execute();

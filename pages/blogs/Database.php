@@ -10,9 +10,10 @@ class Database{
 	private static $dbcon;
 
 
-
 	private function __construct(){
+
 	}
+
 
 	// get PDO connection (a method) to call it dbcon::getDb();
 	public static function getDb(){
@@ -27,9 +28,7 @@ class Database{
 				exit();
 			}
 		}
-		return self::$dbcon;
+		return self::$dbcon;	
 	}
 }
-
-
 ?>

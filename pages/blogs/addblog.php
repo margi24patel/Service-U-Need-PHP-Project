@@ -1,6 +1,8 @@
 <?php
-	require_once 'BlogDatabase.php';
+	
+	require_once 'Database.php';
 	require_once 'Blog.php';
+
 		if(isset($_POST['addblog'])){
 			$title = $_POST['title'];
 			$image_title = $_POST['image_title'];
@@ -16,7 +18,7 @@
 
 			$c = $b->addBlog($title, $image_title, $image_url, $first_name, $last_name, $publish_date,$content, $db);
 			if($c){
-				echo "Added blog successfully";
+				header('location: index.php');
 			}else{
 				echo "there is a problem adding a new blog";
 			}
