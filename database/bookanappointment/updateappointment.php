@@ -1,35 +1,53 @@
 <?php
+require_once '../../menu/Database.php';
+require_once  '../../class/Appointment.php';
 
-require_once 'class/Appointment.php';
-require_once 'menu/Database.php';
+$name = $email = $program = $service = $date = $time = "";
 
-if(isset($_POST['bookapp'])){
-  
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $phone = $_POST['phone'];
-  $service = $_POST['service'];
-  $date = $_POST['date'];
-  $time = $_POST['time'];
-  $db = Database::getDb();
+if(isset($_POST['id'])){
+    $id= $_POST['id'];
+    $db = Database::getDb();
 
-  $a = new Appointment();
-  $c = $a->addAppointment($name,$email,$phone,$service,$date,$time,$db);
-  if($c){
-    echo "Apppointment booked successfully";
-  }else{
-    echo "Error in booking appointment";
-  }
+    $s = new Appointment();
+    $appointment = $s->getAppointmentById($id, $db);
+
+    $name =  $appointment->name;
+    $email = $appointment->email;
+    $phone = $appointment->phone;
+    $service = $appointment->service;
+    $date = $appointment->appointment_date;
+    $time = $appointment->appointment_time;
+
+
 }
+if(isset($_POST['updateappointment'])){
+    $id= $_POST['aid'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $service = $_POST['service'];
+    $date = $_POST['date'];
+    $time = $_POST['time'];
 
+    $db = Database::getDb();
+    $a = new Appointment();
+    $count = $a->updateAppointment($id, $name, $email, $phone, $service, $date, $time, $db);
+
+    if($count){
+       header('Location:  ../../listappointments.php');
+    } else {
+        echo "problem";
+    }
+}
 
 
 ?>
 
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Book an appointment</title>
+    <title>Book an appointment</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,10 +67,10 @@ if(isset($_POST['bookapp'])){
 <body>
 <!-- header.php -->
 
-	<?php require_once 'body/header.php' ?>
+    <?php require_once '../../body/header.php' ?>
 
 <main>
-	<div class="container">
+    <div class="container">
   <h2>Book an appointment</h2>
   
   
@@ -63,46 +81,47 @@ if(isset($_POST['bookapp'])){
    
 
   <form class="form-horizontal" action="" method="post">
-  	<div class="form-group">
+    <input type="hidden" name="aid" value="<?= $id; ?>" />
+    <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" value="<?= $name; ?>">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Email</label>
       <div class="col-sm-10">
-        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="<?= $email; ?>">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="phone">Phone</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+        <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone" value="<?= $phone; ?>">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="service">Service</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="service" placeholder="Enter Service" name="service">
+        <input type="text" class="form-control" id="service" placeholder="Enter Service" name="service" value="<?= $service; ?>">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="date">Date</label>
       <div class="col-sm-10">
-        <input type="date" class="form-control" id="date" name="date">
+        <input type="date" class="form-control" id="date" name="date" value="<?= $date; ?>">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="time">Time</label>
       <div class="col-sm-10">
-        <input type="time" class="form-control" id="time" name="time">
+        <input type="time" class="form-control" id="time" name="time" value="<?= $time; ?>">
       </div>
     </div>
     
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" name="bookapp" class="btn btn-default">Book an apoointment</button>
+        <button type="submit" name="updateappointment" class="btn btn-default">Update an apoointment</button>
       </div>
     </div>
   </form>
@@ -110,7 +129,7 @@ if(isset($_POST['bookapp'])){
 </main>
 <!-- footer.php -->
 <footer>
-	<?php require_once 'body/footer.php' ?>
+    <?php require_once '../../body/footer.php' ?>
 </footer>
   <!-- SCRIPTS -->
   <!-- JQuery -->
@@ -123,15 +142,3 @@ if(isset($_POST['bookapp'])){
   <script type="text/javascript" src="bootstrap/js/mdb.js"></script>
 </body>
 </html>
-
-
-<form action="" method="post">
-    <input type="hidden" name="aid" value="<?= $id; ?>" />
-    Name: <input type="text" name="name" value="<?= $name; ?>" /><br/>
-    Email: <input type="text" name="email" value="<?= $email; ?>"/><br />
-    Phone: <input type="text" name="phone" value="<?= $phone; ?>"/><br />
-    Service: <input type="text" name="service" value="<?= $service; ?>"/><br />
-    Date: <input type="date" name="date" value="<?= $date; ?>"/><br />
-    Time: <input type="time" name="time" value="<?= $time; ?>"/><br />
-    <input type="submit" name="updateappointment" value="Update Appointment">
-</form>
