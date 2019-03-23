@@ -1,0 +1,20 @@
+#signup_section{
+   background-color: silver;
+  }
+.form-control{
+    border:2px solid black;
+    border-radius:10px;
+  }
+
+  #submit_btn{
+     border:2px solid black;
+    border-radius:10px; 
+    padding:5px;
+    margin-top:10px;
+    left:30;
+     
+ }
+ #submit_btn:hover{
+    background-color:orange;
+ }
+ 
