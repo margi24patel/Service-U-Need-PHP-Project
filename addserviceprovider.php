@@ -1,22 +1,21 @@
 <?php
 
 require_once 'class/Appointment.php';
+require_once 'menu/Menu.php';
 require_once 'menu/Database.php';
 $db = Database::getDb();
 $name = $email = $phone = $service = $date = $time = $response_msg = "";
+$s = new Menu();
+$ser = $s->getAllMenus($db);
+
 
 if(isset($_POST['bookapp'])){
   
   $name = $_POST['name'];
-  $email = $_POST['email'];
   $phone = $_POST['phone'];
-  $address = $_POST['address'];
-  $city = $_POST['city'];
-  $province = $_POST['province'];
-  $postal = $_POST['postal'];
+  $email = $_POST['email'];
   $service = $_POST['service'];
-  $date = $_POST['date'];
-  $time = $_POST['time'];
+  $city = $_POST['city'];
   $flag = 0;
 
   //VALIDATION
@@ -51,32 +50,12 @@ if(isset($_POST['bookapp'])){
     $phone_err = "Please enter phone. ";
     $flag = 1;
   }
-  if($address == ""){
-    $address_err = "Please enter address. ";
-    $flag = 1;
-  }
-  if($city == ""){
-    $city_err = "Please enter city. ";
-    $flag = 1;
-  }
-  if($province == ""){
-    $province_err = "Please enter province. ";
-    $flag = 1;
-  }
-  if($postal == ""){
-    $postal_err = "Please enter postal. ";
-    $flag = 1;
-  }
   if($service == ""){
     $service_err = "Please enter service. ";
     $flag = 1;
   }
-  if($date == ""){
-    $date_err = "Please enter date. ";
-    $flag = 1;
-  }
-  if($time == ""){
-    $time_err = "Please enter time. ";
+  if($city == ""){
+    $city_err = "Please enter city. ";
     $flag = 1;
   }
 
@@ -89,11 +68,11 @@ if(isset($_POST['bookapp'])){
 
   $a = new Appointment();
   if($flag == 0){
-    $c = $a->addAppointment($name,$email,$phone,$service,$date,$time,$db);
+    $c = $a->addServiceProvider($name,$phone,$email,$service,$city,$db);
     if($c){
-      $response_msg = "Apppointment booked successfully";
+      $response_msg = "Service Provider added successfully";
     }else{
-      $response_msg = "Error in booking appointment";
+      $response_msg = "Error in adding service provider";
     }
   }
 }
@@ -105,7 +84,7 @@ if(isset($_POST['bookapp'])){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Book an appointment</title>
+	<title>Service Provider Registration</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -119,7 +98,6 @@ if(isset($_POST['bookapp'])){
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <!-- Your custom styles (optional) -->
   <link rel='stylesheet' type='text/css' href='styles/style.css'>
-  <link rel='stylesheet' type='text/css' href='styles/bookanappointment.css'>
 </head>
 
 <body>
@@ -132,11 +110,7 @@ if(isset($_POST['bookapp'])){
   <h2>Book an appointment</h2>
   
   
-  <div class="view overlay z-depth-1-half">
-    <img src="images/bookappointment_banner.jpg" alt="banner_bookAnAppointment" class="card-img-top img-fluid">
-    <div class="mask rgba-white-light"></div>
-  </div>
-   
+  
 
   <form class="form-horizontal" action="" method="post">
   	<div class="form-group">
@@ -172,7 +146,6 @@ if(isset($_POST['bookapp'])){
               ?>
           </span>
       </div>
-          
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="phone">Phone</label>
@@ -191,22 +164,30 @@ if(isset($_POST['bookapp'])){
         </span>
       </div>
     </div>
+
     <div class="form-group">
-      <label class="control-label col-sm-2" for="address">Address</label>
+      <label class="control-label col-sm-2" for="service">Service</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="address" placeholder="Enter address" name="address" value="<?php
-                                if(isset($address)){
-                                    echo $address;
+        <input type="text" class="form-control" id="service" placeholder="Enter Service" name="service" value="<?php
+                                if(isset($service)){
+                                    echo $service;
                                 }
                           ?>" >
+        <select name="chooser" id=“chooser”>
+          <?php while ($row = $ser->fetch_assoc()): ?>
+
+            <option value="<?php echo $row['service_id'];?>"><?php echo $row['name']; ?></option>
+
+          <?php endwhile; ?>
+        </select>
         <span style="color:red;">
-                <?php
-                    if(isset($address_err)){
-                        echo $address_err;
-                    }
-                    ?>
+              <?php
+                if(isset($service_err)){
+                  echo $service_err;
+                }
+              ?>
         </span>
-      </div>             
+      </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="city">City</label>
@@ -225,98 +206,11 @@ if(isset($_POST['bookapp'])){
         </span>
       </div>             
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="province">Province</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="province" placeholder="Enter province" name="province" value="<?php
-                                if(isset($province)){
-                                    echo $province;
-                                }
-                          ?>" >
-        <span style="color:red;">
-                <?php
-                    if(isset($province_err)){
-                        echo $province_err;
-                    }
-                    ?>
-        </span>
-      </div>             
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="postal">Postal</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="postal" placeholder="Enter postal" name="postal" value="<?php
-                                if(isset($postal)){
-                                    echo $postal;
-                                }
-                          ?>" >
-        <span style="color:red;">
-                <?php
-                    if(isset($postal_err)){
-                        echo $postal_err;
-                    }
-                    ?>
-        </span>
-      </div>             
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="service">Service</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="service" placeholder="Enter Service" name="service" value="<?php
-                                if(isset($service)){
-                                    echo $service;
-                                }
-                          ?>" >
-        <span style="color:red;">
-              <?php
-                if(isset($service_err)){
-                  echo $service_err;
-                }
-              ?>
-        </span>
-      </div>
-          
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="date">Date</label>
-      <div class="col-sm-10">
-        <input type="date" class="form-control" id="date" name="date" value="<?php
-                                if(isset($date)){
-                                    echo $date;
-                                }
-                          ?>" >
-        <span style="color:red;">
-              <?php
-                if(isset($date_err)){
-                  echo $date_err;
-                }
-              ?>
-        </span>
-      </div>
-          
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="time">Time</label>
-      <div class="col-sm-10">
-        <input type="time" class="form-control" id="time" name="time" value="<?php
-                                if(isset($time)){
-                                    echo $time;
-                                }
-                          ?>" >
-        <span style="color:red;">
-              <?php
-                if(isset($time_err)){
-                  echo $time_err;
-                }
-              ?>
-        </span>
-      </div>
-          
-    </div>
+    
     
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" name="bookapp" class="btn btn-default">Book an apoointment</button>
+        <button type="submit" name="bookapp" class="btn btn-default">Submit</button>
       </div>
     </div>
 

@@ -1,6 +1,6 @@
 <?php
-require_once '../../menu/Database.php';
-require_once  '../../class/Appointment.php';
+require_once 'menu/Database.php';
+require_once  'class/ServiceProviderRegistration.php';
 
 $name = $email = $program = $service = $date = $time = "";
 
@@ -8,33 +8,31 @@ if(isset($_POST['id'])){
     $id= $_POST['id'];
     $db = Database::getDb();
 
-    $s = new Appointment();
-    $appointment = $s->getAppointmentById($id, $db);
+    $s = new ServiceProviderRegistration();
+    $serviceprovider = $s->getServiceProviderById($id, $db);
 
-    $name =  $appointment->name;
-    $email = $appointment->email;
-    $phone = $appointment->phone;
-    $service = $appointment->service;
-    $date = $appointment->appointment_date;
-    $time = $appointment->appointment_time;
+    $name =  $serviceprovider->name;
+    $email = $serviceprovider->email;
+    $phone = $serviceprovider->phone;
+    $service = $serviceprovider->service;
+    $date = $serviceprovider->city;
 
 
 }
 if(isset($_POST['updateappointment'])){
     $id= $_POST['aid'];
     $name = $_POST['name'];
-    $email = $_POST['email'];
     $phone = $_POST['phone'];
+    $email = $_POST['email'];
     $service = $_POST['service'];
-    $date = $_POST['date'];
-    $time = $_POST['time'];
+    $date = $_POST['city'];
 
     $db = Database::getDb();
     $a = new Appointment();
-    $count = $a->updateAppointment($id, $name, $email, $phone, $service, $date, $time, $db);
+    $count = $a->updateServiceProvider($id, $name, $phone, $email, $service, $city, $db);
 
     if($count){
-       header('Location:  ../../listappointments.php');
+       header('Location:  listserviceproviders.php');
     } else {
         echo "problem";
     }
@@ -47,7 +45,7 @@ if(isset($_POST['updateappointment'])){
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Book an appointment</title>
+    <title>Service Provider</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -61,21 +59,20 @@ if(isset($_POST['updateappointment'])){
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <!-- Your custom styles (optional) -->
   <link rel='stylesheet' type='text/css' href='styles/style.css'>
-  <link rel='stylesheet' type='text/css' href='styles/bookanappointment.css'>
 </head>
 
 <body>
 <!-- header.php -->
 
-    <?php require_once '../../body/header.php' ?>
+    <?php require_once 'body/header.php' ?>
 
 <main>
     <div class="container">
-  <h2>Book an appointment</h2>
+  <h2>Service Provider</h2>
   
   
   <div class="view overlay z-depth-1-half">
-    <img src="images/bookappointment_banner.jpg" alt="banner_bookAnAppointment" class="card-img-top img-fluid">
+    <img src="images/bookappointment_banner.jpg" alt="banner_ServiceProvider" class="card-img-top img-fluid">
     <div class="mask rgba-white-light"></div>
   </div>
    
@@ -107,15 +104,9 @@ if(isset($_POST['updateappointment'])){
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="date">Date</label>
+      <label class="control-label col-sm-2" for="city">City</label>
       <div class="col-sm-10">
-        <input type="date" class="form-control" id="date" name="date" value="<?= $date; ?>">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="time">Time</label>
-      <div class="col-sm-10">
-        <input type="time" class="form-control" id="time" name="time" value="<?= $time; ?>">
+        <input type="date" class="form-control" id="city" name="city" value="<?= $city; ?>">
       </div>
     </div>
     
@@ -129,7 +120,7 @@ if(isset($_POST['updateappointment'])){
 </main>
 <!-- footer.php -->
 <footer>
-    <?php require_once '../../body/footer.php' ?>
+    <?php require_once 'body/footer.php' ?>
 </footer>
   <!-- SCRIPTS -->
   <!-- JQuery -->

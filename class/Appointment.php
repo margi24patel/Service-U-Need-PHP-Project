@@ -14,15 +14,19 @@ class Appointment
 		return $appointments;
 	}
 
-	public function addAppointment($name, $email, $phone, $service, $date, $time, $dbcon){
+	public function addAppointment($name, $email, $phone, $address, $city, $province, $postal, $service, $date, $time, $dbcon){
 
-		$sql = "INSERT INTO book_an_appointments (name,email,phone, service, appointment_date, appointment_time)
-			VALUES (:name, :email, :phone, :service, :a_date, :a_time) "; //placeholder for name,email,program by ':'
+		$sql = "INSERT INTO book_an_appointments (name,email,phone, address, city, province, postal, service, appointment_date, appointment_time)
+			VALUES (:name, :email, :phone, :address, :city, :province, :postal, :service, :a_date, :a_time) ";
 		$pst = $dbcon->prepare($sql);
 		
 		$pst->bindParam(':name', $name);//name of the placeholder,actual value
 		$pst->bindParam(':email', $email);
 		$pst->bindParam(':phone', $phone);
+        $pst->bindParam(':address', $address);
+        $pst->bindParam(':city', $city);
+        $pst->bindParam(':province', $province);
+        $pst->bindParam(':postal', $postal);
 		$pst->bindParam(':service', $service);
 		$pst->bindParam(':a_date', $date);
 		$pst->bindParam(':a_time', $time);
@@ -42,50 +46,33 @@ class Appointment
 		
 		return $count;
 	}
+	
 
-	/*public function updateAppointment($id, $name, $email, $phone, $service, $date, $time, $db){
+    public function updateAppointment($id, $name, $email, $phone, $address, $city, $province, $postal, $service, $date, $time, $db){
         $sql = "Update book_an_appointments
                 set name = :name,
                 email = :email,
                 phone = :phone,
-                service = :service,
-                appointment_date = :a_date,
-                appointment_time = :a_time
-                WHERE id = :id
-        ";
-
-        $pst =  $db->prepare($sql);
-
-        $pst->bindParam(':name', $name);
-        $pst->bindParam(':email', $email);
-        $pst->bindParam(':phone', $phone);
-        $pst->bindParam(':service', $service);
-        $pst->bindParam(':a_date', $date);
-        $pst->bindParam(':a_time', $time);
-        $pst->bindParam(':id', $id);
-
-        $count = $pst->execute();
-
-        return $count;
-    }*/	
-
-    public function updateAppointment($id, $name, $email, $phone, $service, $date, $time, $db){
-        $sql = "Update book_an_appointments
-                set name = :name,
-                email = :email,
-                phone = :phone,
+                address = :address,
+                city = :city,
+                province = :province,
+                postal = :postal,
                 service = :service,
                 appointment_date = :a_date,
                 appointment_time = :a_time
                 WHERE id = :id
         
-        ";
+         ";
 
         $pst =  $db->prepare($sql);
 
         $pst->bindParam(':name', $name);
         $pst->bindParam(':email', $email);
         $pst->bindParam(':phone', $phone);
+        $pst->bindParam(':address', $address);
+        $pst->bindParam(':city', $city);
+        $pst->bindParam(':province', $province);
+        $pst->bindParam(':postal', $postal);
         $pst->bindParam(':service', $service);
         $pst->bindParam(':a_date', $date);
         $pst->bindParam(':a_time', $time);
