@@ -18,16 +18,18 @@
     $flag = 1 ;
 
     //regex pattern for firstname,lastname and username.
-    $namepattern = "/^[A-Za-z-,]{3,20}?=.*\d)/";
+    
+
+     $namepattern="/^[A-Za-z-,]{3,20}$/";
         //firstname validation
         if($fname == "" ){
            $nameerror = "please enter value";
            $flag = 0 ;
            }
-        elseif(!preg_match($namepattern, $fname)){
-          $nameerror = "Enter only letters";
-          $flag = 0 ;
-          } 
+      elseif(!preg_match($namepattern, $fname)){
+              $nameerror = "Enter only letter";
+              $flag = 0 ;  
+            } 
 
         //lastname validation
         if($lname == "" ){
@@ -56,7 +58,7 @@
           $flag = 0 ;
           }
       elseif(!preg_match($passwordpattern, $password)){
-          $pswerror = "Password length should be maximum 8 character which cointain 1 uppercase,1 lowercase and at least one digit";
+          $pswerror = "Password length should be minimum 8 character which cointain 1 uppercase,1 lowercase and at least one digit";
            $flag = 0 ;
           } 
 
