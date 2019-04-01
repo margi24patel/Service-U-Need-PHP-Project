@@ -1,3 +1,26 @@
+<?php  
+
+  require_once 'menu/Database.php';
+  require_once 'database/subscribe/Subscriber.php';
+      
+   if(isset($_POST['addsub']))
+   {
+    $emailid = $_POST['emailid'];
+
+    $db = Database::getdb();
+    $s = new subscriber();
+    $n = $s->addsubscriber($emailid,$db);
+
+
+    if($n){
+      //header("Location:listsubscriber.php");
+      echo "successfully";
+    }
+    else{
+      echo "problem adding a subscriber";
+    }
+   }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +45,9 @@
 	   <form action="" method="post">
          <div class="form-group">
           <label>Enter Your EmailID:</label>
-          <input type="email" class="form-control" id="emailid">
+          <input type="email" class="form-control" id="emailid" name="emailid">
          </div>
-         <button type="submit" value="SUBMIT" class="btn btn-default" id="submit">SUBSCRRIBE</button>
+         <button type="submit" value="SUBMIT" name="addsub" class="btn btn-default" id="submit">SUBSCRRIBE</button>
 	    </form>
    </fieldset>
    </div>

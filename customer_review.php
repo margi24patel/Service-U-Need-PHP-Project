@@ -22,16 +22,61 @@ echo "<link rel='stylesheet' type='text/css' href='styles/style.css'>
 <div class="container">
   <h1>Customer Reviews</h1>
   <h2>Write your Reviews</h2>
+    
+<?php
+require_once 'database/customer_reviews_classfile/Database.php';
+require_once 'database/customer_reviews_classfile/CustomerReview.php';
 
-    <form class="form-horizontal" action="customer_review.php">
+if(isset($_POST['addreview'])){
+       $client_id = $_POST['client_id'];
+       $customer_name = $_POST['customer_name'];
+       $service_id = $_POST['service_id'];
+       $rating = $_POST['rating'];
+       $comment	= $_POST['comment'];
+       $date = $_POST['date'];
+       
+      if(!empty($_POST['customer_name']) && !empty($_POST['rating']))
+        {
+           $dbcon = Database::getDb();
+           $r = new CustomerReview();
+           $c = $r->addCustomerReview($client_id, $customer_name, $service_id, $rating, $comment, $date, $dbcon);
+
+           if($c){
+              // header('Location:  listcustomerreviews.php');
+               echo "<h4>" . "Thank You " . $customer_name  . " for your Feedback! Your Feedback is imporatant for us."  . "</h4>";
+
+            } 
+            else 
+            {
+               echo "problem adding a customer review";
+            }
+        
+        } 
+        else 
+        {
+           echo "<span style='color:red;'>" . "Please fill all required fields" . "</span>";
+        }
+  
+        
+    }
+
+?>
+
+    <form method="post" class="form-horizontal" action="">
+        <!-- client id as a foreign key-->
+        <input type="hidden" name="client_id"  /> 
       
-      <div class="form-group"><label class="control-label col-sm-2" >Customer Name:</label></div>
+   <!--   <div class="form-group"><label class="control-label col-sm-2" >Customer Name:</label></div> --->
+        Customer Name: <input type="text" name="customer_name" /><br> 
       
+        <!-- Service Provider id as a foreign key-->
+        <input type="hidden" name="service_id"  /> 
+        
       <div class="form-group">
           <label class="control-label col-sm-2"  for="rating" >Rating:</label>
           <div class="col-sm-offset-2 col-sm-10">
               <div class="radio">
-                <label><input type="radio" name="rating" value="1-star" checked> 1 star</label>
+                <label><input type="radio" name="rating" value="1 star" checked>1 star</label>
               </div>
               <div class="radio">
                 <label><input type="radio" name="rating" value="2-star"> 2 stars</label>
@@ -79,7 +124,7 @@ echo "<link rel='stylesheet' type='text/css' href='styles/style.css'>
       
       <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" name="addreview" class="btn btn-default">Submit</button>
       </div>
       </div>
       

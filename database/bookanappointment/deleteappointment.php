@@ -1,7 +1,7 @@
 <?php
 //echo "Delete";
-require_once '../../menu/Database.php';
-require_once '../../class/Appointment.php';
+require_once 'menu/Database.php';
+require_once 'class/Appointment.php';
 
 if(isset($_POST['id'])){
 	$id= $_POST['id'];
@@ -11,7 +11,7 @@ if(isset($_POST['id'])){
 	$count = $s->deleteAppointment($id, $db);
 	if($count) {
 		echo "Appointment Deleted";
-		header("Location: ../../listappointments.php");
+		header("Location: listappointments.php");
 	}
 	else{
 		echo "Problem deleting appointment";

@@ -23,7 +23,7 @@ class Client
         return $count;
     }
 
-/*  public function deleteClient($id,$db)
+  public function deleteClient($id,$db)
     {
 
      $sql = "DELETE FROM client_registrations WHERE id = :id";
@@ -87,5 +87,5 @@ class Client
         $pst->bindParam(':id', $id);
         $pst->execute();
         return $pst->fetch(PDO::FETCH_OBJ);
-    } */
+    } 
 }
