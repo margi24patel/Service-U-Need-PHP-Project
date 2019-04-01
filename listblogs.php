@@ -1,6 +1,6 @@
 <?php
-	require_once 'BlogDatabase.php';
-	require_once 'Blog.php';
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/database/Database.php');
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/class/Blog.php');
 
 	$dbcon = Database::getDb();
 
@@ -13,7 +13,7 @@
     <section>
         <div class='blog-section'>
             <h1>Blogs</h1>
-            <form action="addblog.php" method="post">
+            <form action="database/blog/addblog.php" method="post">
                 <input type="submit" name="add" value="Add a Blog" />
             </form>
             <?php foreach($myblog as $blog){
@@ -28,11 +28,11 @@
                         "<p>Posted on " . $blog->publish_date . " by " . $blog->first_name . " " . $blog->last_name . 
                          "</p>" .
                          "<p>" . $blog->content . "</p>" .
-                         "<form action='delete-blog.php' method='post'>" .
+                         "<form action='database/blog/delete-blog.php' method='post'>" .
                          "<input type='hidden' name='id' value='$blog->id' />" .
                          "<input type='submit' name='delete' value='Delete Blog' />" . 
                          "</form>" .  
-                         "<form action='update-blog.php' method='post'>" .
+                         "<form action='database/blog/update-blog.php' method='post'>" .
                          "<input type='hidden' name='id' value='$blog->id' />" .
                          "<input type='submit' name='update' value='update Blog' />" . 
                          "</form>" .                                                

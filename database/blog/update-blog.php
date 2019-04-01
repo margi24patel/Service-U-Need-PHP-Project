@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Database.php';
-require_once 'Blog.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/database/Database.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/class/Blog.php');
 
 if(isset($_POST['id'])){
 	$id = $_POST['id'];
@@ -33,7 +33,7 @@ if(isset($_POST['updateblog'])){
 	$count = $b->updateBlog($id,$title,$image_title,$image_url,$first_name,$last_name,$publish_date,$content,$db);
 
 	if($count){
-		header('Location: index.php');
+		header('Location: ../../blogPage.php');
 	}else{
 		echo "problem showing blog table values";
 	}

@@ -1,7 +1,7 @@
 <?php
 	
-	require_once 'Database.php';
-	require_once 'Blog.php';
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/database/Database.php');
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/class/Blog.php');
 
 		if(isset($_POST['addblog'])){
 			$title = $_POST['title'];
@@ -18,7 +18,7 @@
 
 			$c = $b->addBlog($title, $image_title, $image_url, $first_name, $last_name, $publish_date,$content, $db);
 			if($c){
-				header('location: index.php');
+				header('Location: ../../blogPage.php');
 			}else{
 				echo "there is a problem adding a new blog";
 			}

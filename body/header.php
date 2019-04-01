@@ -1,6 +1,6 @@
 <?php
-	require_once './menu/Database.php';
-	require_once './menu/Menu.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/database/Database.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/class/Menu.php');
 	
 	$dbcon = Database::getDb();
 
@@ -15,12 +15,12 @@
 	<nav>
 		<div class="wrapper">
 			<div id="top-logo">
-				<a id="logo" href="index.php"><img src="images/Service-logo.png" id="logo-image"></a>
+				<a id="logo" href="homePage.php"><img src="images/Service-logo.png" id="logo-image"></a>
 			</div>
 			<div></div>
 			<div class="deep-wrapper">
 				<div id="Blog">
-					<div class="box"><a href="pages/blogs/index.php">Blogs</a></div>
+					<div class="box"><a href="blogPage.php">Blogs</a></div>
 				</div>
 				<div id="#Professional">
 					<div class="box"><a href="#">Become A Professional</a></div>
