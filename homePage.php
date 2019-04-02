@@ -8,15 +8,15 @@
 
 <body>
 <!-- header.php -->
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/body/header.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
 <!-- main.php -->
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/body/main-homepage.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/main-homepage.php'); ?>
 
 <!-- footer.php -->
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Service-U-Need/body/footer.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
 
 </body>
 </html>
