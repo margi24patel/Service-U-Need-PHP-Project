@@ -87,5 +87,15 @@ class Client
         $pst->bindParam(':id', $id);
         $pst->execute();
         return $pst->fetch(PDO::FETCH_OBJ);
-    } 
+    }
+    public function getAllClientsLogin($userlogin,$passlogin,$db){
+
+        $sql = "SELECT*FROM client_registrations WHERE user_name='$userlogin' and password='$passlogin'";
+
+    $pst = $db->prepare($sql);
+    $pst->execute();
+    $Clients = $pst->fetchAll(PDO::FETCH_OBJ);
+
+    return $Clients;
+  } 
 }
