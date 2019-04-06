@@ -1,8 +1,9 @@
 <?php
 
 require_once 'class/Appointment.php';
-require_once 'menu/Menu.php';
-require_once 'menu/Database.php';
+require_once 'class/Menu.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
+
 $db = Database::getDb();
 $name = $email = $phone = $service = $date = $time = $response_msg = "";
 $s = new Menu();
@@ -15,6 +16,7 @@ if(isset($_POST['bookapp'])){
   $phone = $_POST['phone'];
   $email = $_POST['email'];
   $service = $_POST['service'];
+  $subservice = $_POST['subservice'];
   $city = $_POST['city'];
   $flag = 0;
 
@@ -68,7 +70,7 @@ if(isset($_POST['bookapp'])){
 
   $a = new Appointment();
   if($flag == 0){
-    $c = $a->addServiceProvider($name,$phone,$email,$service,$city,$db);
+    $c = $a->addServiceProvider($name,$phone,$email,$subservice,$city,$db);
     if($c){
       $response_msg = "Service Provider added successfully";
     }else{
@@ -107,9 +109,7 @@ if(isset($_POST['bookapp'])){
 
 <main>
 	<div class="container">
-  <h2>Book an appointment</h2>
-  
-  
+  <h2>Service Provider registration</h2>
   
 
   <form class="form-horizontal" action="" method="post">
@@ -168,18 +168,29 @@ if(isset($_POST['bookapp'])){
     <div class="form-group">
       <label class="control-label col-sm-2" for="service">Service</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="service" placeholder="Enter Service" name="service" value="<?php
+        <!--input type="text" class="form-control" id="service" placeholder="Enter Service" name="service" value="<"?php
                                 if(isset($service)){
                                     echo $service;
                                 }
-                          ?>" >
-        <select name="chooser" id=“chooser”>
-          <?php while ($row = $ser->fetch_assoc()): ?>
+                          ?>" -->
+        <?php
+          $b = new Menu();
 
-            <option value="<?php echo $row['service_id'];?>"><?php echo $row['name']; ?></option>
+          $mymenu = $b->getAllMenus(Database::getDb());
 
-          <?php endwhile; ?>
-        </select>
+        ?>
+        <select name="service" id="service">
+          <?php $categories = array(); ?>
+          <?php 
+
+          foreach($mymenu as $menu)
+          {
+            echo "<option class='dropbtn' value= '$menu->id'>$menu->name</option>"; 
+          }    
+          ?>
+          </select>
+      
+        
         <span style="color:red;">
               <?php
                 if(isset($service_err)){
@@ -189,6 +200,25 @@ if(isset($_POST['bookapp'])){
         </span>
       </div>
     </div>
+<div class="form-group">
+      <label class="control-label col-sm-2" for="subservice">Sub Service</label>
+      <div class="col-sm-10">
+        <select name="subservice" id="subservice">
+
+
+        </select>
+      
+        
+        <span style="color:red;">
+              <?php
+                if(isset($service_err)){
+                  echo $service_err;
+                }
+              ?>
+        </span>
+      </div>
+    </div>
+
     <div class="form-group">
       <label class="control-label col-sm-2" for="city">City</label>
       <div class="col-sm-10">
@@ -227,6 +257,7 @@ if(isset($_POST['bookapp'])){
 	<?php require_once 'body/footer.php' ?>
 </footer>
   <!-- SCRIPTS -->
+  
   <!-- JQuery -->
   <script type="text/javascript" src="bootstrap/js/jquery-3.3.1.min.js"></script>
   <!-- Bootstrap tooltips -->
@@ -235,17 +266,8 @@ if(isset($_POST['bookapp'])){
   <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="bootstrap/js/mdb.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="script/service.js"></script>
+
 </body>
 </html>
-
-
-<!--<form action="" method="post">
-    <input type="hidden" name="aid" value="<?= $id; ?>" />
-    Name: <input type="text" name="name" value="<?= $name; ?>" /><br/>
-    Email: <input type="text" name="email" value="<?= $email; ?>"/><br />
-    Phone: <input type="text" name="phone" value="<?= $phone; ?>"/><br />
-    Service: <input type="text" name="service" value="<?= $service; ?>"/><br />
-    Date: <input type="date" name="date" value="<?= $date; ?>"/><br />
-    Time: <input type="time" name="time" value="<?= $time; ?>"/><br />
-    <input type="submit" name="updateappointment" value="Update Appointment">
-</form>-->

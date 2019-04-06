@@ -1,7 +1,7 @@
 <?php
 
 require_once 'class/Appointment.php';
-require_once 'menu/Database.php';
+require_once 'database/Database.php';
 $db = Database::getDb();
 $name = $email = $phone = $service = $date = $time = $response_msg = "";
 
@@ -170,7 +170,7 @@ if(isset($_POST['bookapp'])){
                   echo $email_err;
                 }
               ?>
-          </span>
+        </span>
       </div>
           
     </div>
