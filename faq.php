@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script type="text/javascript" src="script/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="script/faq.js" ></script>
   <!-- Your custom styles (optional) -->
   <link rel='stylesheet' type='text/css' href='styles/style.css'>
   <link rel='stylesheet' type='text/css' href='styles/faq.css'>
@@ -16,13 +18,32 @@
 	<?php require_once 'body/header.php' ?>
 <main id="faq-main">
     <div><img src="images/faq_icon.png" alt="faq icon image"></div>
-    <div id="que-ans">
-     <p>Questions will come from database.</p>
-     <p>Answers will come from database.</p>
-    
-    
-    
-    </div>
+    <div class="container">
+ <div class="row">
+  
+<?php
+
+    require_once 'database/Database.php';
+    require_once 'database/faq/FAQ.php';
+
+    $db = Database:: getdb();
+    $faq = new FAQ();
+    $faqs =  $faq->getAllFAQs($db);
+
+
+    foreach($faqs as $addedfaq)
+    {
+        /*echo "<ul class='list-group'>" .
+             "<li class='list-group-item'>" ."<h3>".  $addedfaq->questions.'</h3>'.'<p>'. $addedfaq->answers .'</p>'.
+             "</li>" .
+             "</ul>";*/
+             echo  '<h3>'.'<a>'.  $addedfaq->questions.'</a>'.'</h3>'."<li class='list-group-item'>". $addedfaq->answers .'</li>' ;
+    }
+
+?>  
+     
+ </div>
+</div>
 </main>
     
 <footer>

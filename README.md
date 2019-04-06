@@ -14,3 +14,5 @@ Working on subscriber feature
 Added delete and list for client registration.
 
 Margi:April 2, 2019 : working on Customer review Feature and will start for Search Feature 
+
+Jetal: Working on FAQ feature and will add frequently asked questions and their answers.

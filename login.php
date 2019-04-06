@@ -1,5 +1,5 @@
 <?php
-require_once 'menu/Database.php';
+require_once 'database/Database.php';
 require_once 'database/clientregistration/Client.php';
 
 if(isset($_POST['lo'])){
@@ -11,10 +11,11 @@ if(isset($_POST['lo'])){
   $n = $c->getAllClientsLogin($user,$pass,$db);
   
   if($row = $n){
-    echo "success";
+    header('location:logout.php'); 
   }
   else{
-    echo "Please signup for login";
+    header('location:clientregistration.php');
+    
   }
 
 }
