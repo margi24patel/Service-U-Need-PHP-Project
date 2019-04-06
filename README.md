@@ -15,4 +15,6 @@ Added delete and list for client registration.
 
 Margi:April 2, 2019 : working on Customer review Feature and will start for Search Feature 
 
-Jetal: Working on FAQ feature and will add frequently asked questions and their answers.
+Jetal: April 5, 2019: Working on FAQ feature and will add frequently asked questions and their answers.
+
+Ekta: April 5, 2019 :Working on chat feature and solving some problem in service provider registration feature.
