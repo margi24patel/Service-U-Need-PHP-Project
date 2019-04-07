@@ -2,7 +2,7 @@
  require_once 'menu/Database.php';
  require_once 'database/clientregistration/Client.php';
 
-
+//delete client by clientid
 if(isset($_POST['id']))
   {   
   	
@@ -13,7 +13,7 @@ if(isset($_POST['id']))
   $count = $c->deleteClient($id,$db);
 
    if($count){
-    	header("Location: listclients_admin.php");;
+    	header("Location: listclients_admin.php");;//go to the list of client page.
     }
     else{
     	echo"problem";

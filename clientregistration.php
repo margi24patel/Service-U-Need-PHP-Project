@@ -4,8 +4,10 @@
 
   $fname=$lname=$uname=$password=$email=$phonenumber=
   $street=$city=$postalcode="";
+  //Get the information from submitted form.
    if(isset($_POST['submit']))
-  {   
+  { 
+    //user information get from the form  
     $fname = $_POST['first_name'];
     $lname = $_POST['last_name'];
     $uname = $_POST['user_name'];
@@ -62,6 +64,7 @@
            $flag = 0 ;
           } 
 
+    // regex for password
     $phonepattern = "/[0-9]{10}/";
       //phone number validation
        if($phonenumber == ""){
@@ -83,7 +86,7 @@
               $postalerror = "Enter valid Postalcode";
               $flag = 0 ;  
             } 
-
+    // declaring database
     $db = Database::getdb();
     $c = new Client();
     
@@ -98,7 +101,7 @@
            else{
                 $message = "problem in registration try again";
                }
-    }
+           }
   }
 
 ?>
@@ -117,8 +120,7 @@
 
 <body>
 <!-- header.php -->
-
-	<?php require_once 'body/header.php' ?>
+   <?php require_once 'body/header.php' ?>
 <main id="signup_section"> 
     <h1 id="heading">Sign Up</h1><span style="color:green; font-size:20px;">
             <?php
@@ -128,72 +130,72 @@
             ?></span>
 	<form action="" method="post" class="form-horizontal">
      <div class="form-group">
-       <label class="control-label col-sm-2" for="first_name">Frist name</label>
-       <div class="col-sm-6">
-        <input type="text" class="form-control" name="first_name"><span style="color:red;">
+        <label class="control-label col-sm-2" for="first_name">Frist name</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" name="first_name"><span style="color:red;">
             <?php
                 if(isset($nameerror)){
                     echo $nameerror;
                 }
             ?></span>
-       </div>
+        </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Last name</label>
-       <div class="col-sm-6">
-        <input type="text" class="form-control" name="last_name"><span style="color:red;">
+        <label class="control-label col-sm-2">Last name</label>
+        <div class="col-sm-6">
+         <input type="text" class="form-control" name="last_name"><span style="color:red;">
             <?php
                 if(isset($lnameerror)){
                     echo $lnameerror;
                 }
             ?></span>
-       </div>
-     </div>
-     <div class="form-group">
-       <label class="control-label col-sm-2">User name</label>
-       <div class="col-sm-6">
-        <input type="text" class="form-control" name="user_name"/><span style="color:red;">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">User name</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" name="user_name"/><span style="color:red;">
             <?php
                 if(isset($unameerror)){
                     echo $unameerror;
                 }
             ?></span>
-       </div>
+        </div>
      </div>
 
      <div class="form-group">
-       <label class="control-label col-sm-2">Password</label>
-       <div class="col-sm-6">
-        <input type="password" class="form-control" name="password"/><span style="color:red;">
+        <label class="control-label col-sm-2">Password</label>
+        <div class="col-sm-6">
+         <input type="password" class="form-control" name="password"/><span style="color:red;">
             <?php
                 if(isset($pswerror)){
                     echo $pswerror;
                 }
             ?></span>
-       </div>
+        </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">EmailID</label>
-       <div class="col-sm-6">
-        <input type="email" class="form-control" name="emailid"/>
-       </div>
+        <label class="control-label col-sm-2">EmailID</label>
+        <div class="col-sm-6">
+          <input type="email" class="form-control" name="emailid"/>
+        </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Phone number</label>
-       <div class="col-sm-6">
-        <input type="text" class="form-control" name="phone_number"/><span style="color:red;">
+        <label class="control-label col-sm-2">Phone number</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" name="phone_number"/><span style="color:red;">
             <?php
                 if(isset($pherror)){
                     echo $pherror;
                 }
             ?></span>
-       </div>
+        </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Street name</label>
-       <div class="col-sm-6">
-        <input type="text" class="form-control" name="street_name"/>
-       </div>
+        <label class="control-label col-sm-2">Street name</label>
+        <div class="col-sm-6">
+         <input type="text" class="form-control" name="street_name"/>
+        </div>
      </div>
      <div class="form-group">
        <label class="control-label col-sm-2">City</label>
@@ -204,7 +206,7 @@
      <div class="form-group">
        <label class="control-label col-sm-2">Postal code</label>
        <div class="col-sm-6">
-        <input type="text" class="form-control" name="postal_code"/><span style="color:red;">
+         <input type="text" class="form-control" name="postal_code"/><span style="color:red;">
             <?php
                 if(isset($postalerror)){
                     echo $postalerror;
@@ -213,10 +215,10 @@
        </div>
      </div>
     <div class="form-group"> 
-    <div class="col-sm-offset-2 col-sm-6">
-      <button type="submit" class="btn btn-default" id="submit_btn" name="submit">Submit</button>
+     <div class="col-sm-offset-2 col-sm-6">
+       <button type="submit" class="btn btn-default" id="submit_btn" name="submit">Submit</button>
+     </div>
     </div>
-  </div>
  </form>
 </main>
 <footer>

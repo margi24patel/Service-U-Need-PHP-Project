@@ -14,38 +14,28 @@
 
 <body>
 <!-- header.php -->
-
 	<?php require_once 'body/header.php' ?>
 <main id="faq-main">
     <div><img src="images/faq_icon.png" alt="faq icon image"></div>
     <div class="container">
- <div class="row">
-  
-<?php
+      <div class="row">
+        <?php
+          require_once 'database/Database.php';
+          require_once 'database/faq/FAQ.php';
 
-    require_once 'database/Database.php';
-    require_once 'database/faq/FAQ.php';
-
-    $db = Database:: getdb();
-    $faq = new FAQ();
-    $faqs =  $faq->getAllFAQs($db);
+          $db = Database:: getdb();
+          $faq = new FAQ();
+          $faqs =  $faq->getAllFAQs($db);
 
 
-    foreach($faqs as $addedfaq)
-    {
-        /*echo "<ul class='list-group'>" .
-             "<li class='list-group-item'>" ."<h3>".  $addedfaq->questions.'</h3>'.'<p>'. $addedfaq->answers .'</p>'.
-             "</li>" .
-             "</ul>";*/
+          foreach($faqs as $addedfaq)
+           {//print question and answer.
              echo  '<h3>'.'<a>'.  $addedfaq->questions.'</a>'.'</h3>'."<li class='list-group-item'>". $addedfaq->answers .'</li>' ;
-    }
-
-?>  
-     
- </div>
-</div>
-</main>
-    
+            }
+        ?>  
+     </div>
+   </div>
+ </main>   
 <footer>
 	<?php require_once 'body/footer.php' ?>
 </footer>
