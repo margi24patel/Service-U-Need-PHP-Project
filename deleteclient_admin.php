@@ -1,5 +1,5 @@
 <?php
- require_once 'menu/Database.php';
+ require_once 'database/Database.php';
  require_once 'database/clientregistration/Client.php';
 
 //delete client by clientid

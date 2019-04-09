@@ -9,14 +9,26 @@ if(isset($_POST['login']))
 
   $db = Database::getdb();
   $c = new Client();
-  $n = $c->getAllClientsLogin($user,$pass,$db);
+  $n = $c->getAllClientsLogin($user,$db);
   //checking for user name and password already exits or not
-  if($row = $n){
+  /*if($row = $n){
     header('location:logout.php'); //if match then go to the logout page
       }
   else{
     header('location:clientregistration.php');//if not then go to the registration page
-     }
+     }*/
+  if($n->password==$pass)
+  {
+    if ($n->privilege == "user") {
+          header('location:logout.php');
+           }
+    else if($n->privilege == "admin"){
+           echo "success you are admin";
+         }
+    }
+  else{
+    header('location:clientregistration.php');
+  }
 }
 
 ?>

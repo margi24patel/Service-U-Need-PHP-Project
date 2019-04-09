@@ -3,7 +3,7 @@
   require_once 'database/clientregistration/Client.php';
 
   $fname=$lname=$uname=$password=$email=$phonenumber=
-  $street=$city=$postalcode="";
+  $street=$city=$postalcode=$privilege="";
   //Get the information from submitted form.
    if(isset($_POST['submit']))
   { 
@@ -17,6 +17,7 @@
     $street = $_POST['street_name'];
     $city = $_POST['city'];
     $postalcode = $_POST['postal_code'];
+    $privilege = $_POST['privilege'];
     $flag = 1 ;
 
     //regex pattern for firstname,lastname and username.
@@ -93,7 +94,7 @@
 
     if($flag == 1){
 
-            $addedclient = $c->addClients( $fname,$lname,$uname,$password, $email, $phonenumber,$street,$city,$postalcode, $db);
+            $addedclient = $c->addClients( $fname,$lname,$uname,$password, $email, $phonenumber,$street,$city,$postalcode,$privilege, $db);
 
            if($addedclient){
                  $message = $fname.$lname."thank you for registration";
@@ -212,6 +213,12 @@
                     echo $postalerror;
                 }
             ?></span>
+       </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">Privilege</label>
+       <div class="col-sm-6">
+         <input type="text" class="form-control" name="privilege" placeholder="user/admin" />
        </div>
      </div>
     <div class="form-group"> 
