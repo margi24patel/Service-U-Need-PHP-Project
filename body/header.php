@@ -31,7 +31,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
 					<div class="box"><a href="#">Become A Professional</a></div>
 				</div>
 				<div id="SignUp">
-					<div class="box" ><a href="#">Register/Login</a></div>
+					<div class="box" ><a href="./login.php">Register/Login</a></div>
 				</div>
 				<div id="Search">
 					<input type="text" name="Search" placeholder="Search for a Service"><input type="submit" value="Search">

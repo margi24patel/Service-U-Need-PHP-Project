@@ -47,6 +47,7 @@ if(isset($_POST['login']))
 <!-- header.php -->
   <?php require_once 'body/header.php' ?>
 <main id="subscribe_section">
+  
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
@@ -58,12 +59,14 @@ if(isset($_POST['login']))
                 <form action="" method="post">
                    <div class="form-group">
                       <label>Username</label>
-                      <input type="text" class="form-control" id="username" name="user">
+                      <input type="text" class="form-control" id="username" name="user" required/>
                       <label>Password</label>
-                      <input type="Password" class="form-control" id="password" name="pass">
+                      <input type="Password" class="form-control" id="password" name="pass" required/>
                       <button class="btn btn-primary" name="login">Login</button>
                    </div>
                 </form>
+                <label>If you don't have account please register</label>
+                <div class="btn btn-primary btn-sm"><a href="clientregistration.php" style="color:white;">REGISTER</a></div>
             </div>
         </div>
       </div>
