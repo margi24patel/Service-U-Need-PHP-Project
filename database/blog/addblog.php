@@ -9,8 +9,8 @@
 			$image_url = $_POST['image_url'];
 			$first_name = $_POST['first_name'];
 			$last_name = $_POST['last_name'];
-      $publish_date = $_POST['publish_date'];
-      $content = $_POST['content'];
+      		$publish_date = $_POST['publish_date'];
+      		$content = $_POST['content'];
 
 
 			$db = Database::getDb();

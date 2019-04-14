@@ -1,7 +1,9 @@
 <?php
 
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Appointment.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
+
 $db = Database::getDb();
 $name = $email = $phone = $service = $date = $time = $response_msg = "";
 
@@ -166,7 +168,7 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
                   echo $email_err;
                 }
               ?>
-          </span>
+        </span>
       </div>
           
     </div>
