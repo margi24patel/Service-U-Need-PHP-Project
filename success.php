@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,20 +18,48 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
 <!-- header.php -->
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
-<body>
-<!-- header.php -->
+<!-- main.php -->
 
-	<?php require_once 'body/header.php' ?>
-<main id="faq-main">
-    <div><img src="images/faq_icon.png" alt="faq icon image"></div>
-    <div id="que-ans">
-     <p>Questions will come from database.</p>
-     <p>Answers will come from database.</p>
-    
-    
-    
-    </div>
-</main>
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/functions/functions.php');
+?>
+
+<!-- Main Section -->
+<body>
+	<div class="header">
+		<h2>Home Page</h2>
+	</div>
+	<div class="content">
+		<!-- notification message -->
+		<?php if (isset($_SESSION['success'])) : ?>
+			<div class="error success" >
+				<h3>
+					<?php 
+						echo $_SESSION['success']; 
+						unset($_SESSION['success']);
+					?>
+				</h3>
+			</div>
+		<?php endif ?>
+		<!-- logged in user information -->
+		<div class="profile_info">
+			<img src="images/user-login.jpg"  >
+
+			<div>
+				<?php  if (isset($_SESSION['user'])) : ?>
+					<strong><?php echo $_SESSION['user']['username']; ?></strong>
+
+					<small>
+						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
+						<br>
+						<a href="index.php?logout='1'" style="color: red;">logout</a>
+					</small>
+
+				<?php endif ?>
+			</div>
+		</div>
+	</div>
+
 <!-- footer.php -->
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>

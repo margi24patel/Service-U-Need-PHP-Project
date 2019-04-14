@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,27 +14,26 @@
 </head>
 
 <body class="container" style="padding-left: 0px;
-padding-right: 0px; margin: 0 auto; width: 1200px;">
+padding-right: 0px; margin: 0 auto; width: 1200px; text-align:center;">
 <!-- header.php -->
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
-<body>
-<!-- header.php -->
+<?php
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login1.php");
+    exit;
+}
+?>
+<!-- main.php -->
 
-	<?php require_once 'body/header.php' ?>
-<main id="faq-main">
-    <div><img src="images/faq_icon.png" alt="faq icon image"></div>
-    <div id="que-ans">
-     <p>Questions will come from database.</p>
-     <p>Answers will come from database.</p>
-    
-    
-    
+    <div class="page-header">
+        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
     </div>
-</main>
-<!-- footer.php -->
+    <p>
+        <a href="admin.php" class="btn btn-primary">Admin Panel </a>
+        <a href="logout.php" class="btn btn-danger" style="background-color:red;">Sign Out of Your Account</a>
+    </p>
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
-
+    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>    
 </body>
 </html>

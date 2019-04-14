@@ -1,8 +1,7 @@
 body{
   margin: 0 auto;
   width: 1200px;
-	padding-left: 0px;
-	padding-right: 0px;
+  
 }
 h2{
 	text-align: center;
@@ -66,21 +65,7 @@ h2{
 
 /* Main Section */
 
-/* sub-menu images section */
-.sub-service{
-	border: 2px solid black;
-	border-radius: 10px;
-	transition: .5s ease;
-}
-.sub-service:hover{
-	opacity: 0.6;
-}
-
-/* Review Section */
-.card-deck{
-	margin-left: 0px;
-  margin-right: 0px;
-}
+/* Blog Main section */
 
 
 /* Footer Social Media Icons */
@@ -179,12 +164,10 @@ a.socialIcon:hover, .socialHoverClass {
 	.container{
 		max-width: 100%;
 	}
-	/* Search bar to show as list when navbar collapse */
 	.pull-right{
 		float:left;
 	}
 	.search-query{
 		width:75%;
-	}
-	
+	}	
 }
