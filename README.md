@@ -18,3 +18,13 @@ Margi:April 2, 2019 : working on Customer review Feature and will start for Sear
 Jetal: April 5, 2019: Working on FAQ feature and will add frequently asked questions and their answers.
 
 Ekta: April 5, 2019 :Working on chat feature and solving some problem in service provider registration feature.
+
+Rabih: April 13, 2019 : Posted the new and final design of the website.
+
+Rabih: April 13, 2019 : Finished the Login/Registeration Feature.
+
+Rabih: April 13, 2019 : Finished the Blog feature 
+
+Rabih: April 13, 2019 : Re-modified Admin panel feature.
+
+Rabih : April 13, 2019 : solved all the conflicts in the repository.

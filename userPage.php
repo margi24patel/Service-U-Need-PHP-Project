@@ -20,7 +20,7 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
 
 <!-- main.php -->
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/blogList.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/userAdmin.php'); ?>
 
 <!-- footer.php -->
 

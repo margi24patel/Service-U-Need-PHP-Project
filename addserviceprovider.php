@@ -105,7 +105,8 @@ if(isset($_POST['bookapp'])){
 <body>
 <!-- header.php -->
 
-	<?php require_once 'body/header.php' ?>
+	<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
+
 
 <main>
 	<div class="container">
@@ -253,9 +254,8 @@ if(isset($_POST['bookapp'])){
 </div>
 </main>
 <!-- footer.php -->
-<footer>
-	<?php require_once 'body/footer.php' ?>
-</footer>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
+
   <!-- SCRIPTS -->
   
   <!-- JQuery -->
@@ -267,6 +267,7 @@ if(isset($_POST['bookapp'])){
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="bootstrap/js/mdb.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="javascript/script.js"></script>
   <script type="text/javascript" src="script/service.js"></script>
 
 </body>
