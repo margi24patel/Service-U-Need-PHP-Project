@@ -1,23 +1,23 @@
 <?php
 
-require_once 'class/ServiceProviderRegistration.php';
+require_once 'class/Appointment.php';
+require_once 'database/Database.php';
 require_once 'class/Menu.php';
-require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
-
 $db = Database::getDb();
 $name = $email = $phone = $service = $date = $time = $response_msg = "";
-$s = new Menu();
-$ser = $s->getAllMenus($db);
-
 
 if(isset($_POST['bookapp'])){
   
   $name = $_POST['name'];
-  $phone = $_POST['phone'];
   $email = $_POST['email'];
-  $service = $_POST['service'];
-  $subservice = $_POST['subservice'];
+  $phone = $_POST['phone'];
+  $address = $_POST['address'];
   $city = $_POST['city'];
+  $province = $_POST['province'];
+  $postal = $_POST['postal'];
+  $service = $_POST['subservice'];
+  $date = $_POST['date'];
+  $time = $_POST['time'];
   $flag = 0;
 
   //VALIDATION
@@ -52,12 +52,32 @@ if(isset($_POST['bookapp'])){
     $phone_err = "Please enter phone. ";
     $flag = 1;
   }
-  if($service == ""){
-    $service_err = "Please enter service. ";
+  if($address == ""){
+    $address_err = "Please enter address. ";
     $flag = 1;
   }
   if($city == ""){
     $city_err = "Please enter city. ";
+    $flag = 1;
+  }
+  if($province == ""){
+    $province_err = "Please enter province. ";
+    $flag = 1;
+  }
+  if($postal == ""){
+    $postal_err = "Please enter postal. ";
+    $flag = 1;
+  }
+  if($service == ""){
+    $service_err = "Please enter service. ";
+    $flag = 1;
+  }
+  if($date == ""){
+    $date_err = "Please enter date. ";
+    $flag = 1;
+  }
+  if($time == ""){
+    $time_err = "Please enter time. ";
     $flag = 1;
   }
 
@@ -68,13 +88,13 @@ if(isset($_POST['bookapp'])){
   $date_err = validate($date);
   $time_err = validate($time);*/
 
-  $a = new ServiceProviderRegistration();
+  $a = new Appointment();
   if($flag == 0){
-    $c = $a->addServiceProvider($name,$phone,$email,$subservice,$city,$db);
+    $c = $a->addAppointment($name,$email,$phone,$service,$date,$time,$db);
     if($c){
-      $response_msg = "Service Provider added successfully";
+      $response_msg = "Apppointment booked successfully";
     }else{
-      $response_msg = "Error in adding service provider";
+      $response_msg = "Error in booking appointment";
     }
   }
 }
@@ -86,7 +106,7 @@ if(isset($_POST['bookapp'])){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Service Provider Registration</title>
+	<title>Book an appointment</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -100,6 +120,7 @@ if(isset($_POST['bookapp'])){
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <!-- Your custom styles (optional) -->
   <link rel='stylesheet' type='text/css' href='styles/style.css'>
+  <link rel='stylesheet' type='text/css' href='styles/bookanappointment.css'>
 </head>
 
 <body>
@@ -109,8 +130,14 @@ if(isset($_POST['bookapp'])){
 
 <main>
 	<div class="container">
-  <h2>Service Provider registration</h2>
+  <h2>Book an appointment</h2>
   
+  
+  <div class="view overlay z-depth-1-half">
+    <img src="images/bookappointment_banner.jpg" alt="banner_bookAnAppointment" class="card-img-top img-fluid">
+    <div class="mask rgba-white-light"></div>
+  </div>
+   
 
   <form class="form-horizontal" action="" method="post">
   	<div class="form-group">
@@ -144,8 +171,9 @@ if(isset($_POST['bookapp'])){
                   echo $email_err;
                 }
               ?>
-          </span>
+        </span>
       </div>
+          
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="phone">Phone</label>
@@ -164,15 +192,79 @@ if(isset($_POST['bookapp'])){
         </span>
       </div>
     </div>
-
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="address">Address</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="address" placeholder="Enter address" name="address" value="<?php
+                                if(isset($address)){
+                                    echo $address;
+                                }
+                          ?>" >
+        <span style="color:red;">
+                <?php
+                    if(isset($address_err)){
+                        echo $address_err;
+                    }
+                    ?>
+        </span>
+      </div>             
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="city">City</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="city" placeholder="Enter city" name="city" value="<?php
+                                if(isset($city)){
+                                    echo $city;
+                                }
+                          ?>" >
+        <span style="color:red;">
+                <?php
+                    if(isset($city_err)){
+                        echo $city_err;
+                    }
+                    ?>
+        </span>
+      </div>             
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="province">Province</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="province" placeholder="Enter province" name="province" value="<?php
+                                if(isset($province)){
+                                    echo $province;
+                                }
+                          ?>" >
+        <span style="color:red;">
+                <?php
+                    if(isset($province_err)){
+                        echo $province_err;
+                    }
+                    ?>
+        </span>
+      </div>             
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="postal">Postal</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="postal" placeholder="Enter postal" name="postal" value="<?php
+                                if(isset($postal)){
+                                    echo $postal;
+                                }
+                          ?>" >
+        <span style="color:red;">
+                <?php
+                    if(isset($postal_err)){
+                        echo $postal_err;
+                    }
+                    ?>
+        </span>
+      </div>             
+    </div>
+    
     <div class="form-group">
       <label class="control-label col-sm-2" for="service">Service</label>
       <div class="col-sm-10">
-        <!--input type="text" class="form-control" id="service" placeholder="Enter Service" name="service" value="<"?php
-                                if(isset($service)){
-                                    echo $service;
-                                }
-                          ?>" -->
+        
         <?php
           $b = new Menu();
 
@@ -200,7 +292,7 @@ if(isset($_POST['bookapp'])){
         </span>
       </div>
     </div>
-<div class="form-group">
+    <div class="form-group">
       <label class="control-label col-sm-2" for="subservice">Sub Service</label>
       <div class="col-sm-10">
         <select name="subservice" id="subservice">
@@ -218,29 +310,64 @@ if(isset($_POST['bookapp'])){
         </span>
       </div>
     </div>
-
     <div class="form-group">
-      <label class="control-label col-sm-2" for="city">City</label>
+      <label class="control-label col-sm-2" for="serviceprovider">Service Provider</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="city" placeholder="Enter city" name="city" value="<?php
-                                if(isset($city)){
-                                    echo $city;
+        <select name="serviceprovider" id="serviceprovider">
+
+
+        </select>
+      
+        
+        <span style="color:red;">
+              <?php
+                if(isset($service_err)){
+                  echo $service_err;
+                }
+              ?>
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="date">Date</label>
+      <div class="col-sm-10">
+        <input type="date" class="form-control" id="date" name="date" value="<?php
+                                if(isset($date)){
+                                    echo $date;
                                 }
                           ?>" >
         <span style="color:red;">
-                <?php
-                    if(isset($city_err)){
-                        echo $city_err;
-                    }
-                    ?>
+              <?php
+                if(isset($date_err)){
+                  echo $date_err;
+                }
+              ?>
         </span>
-      </div>             
+      </div>
+          
     </div>
-    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="time">Time</label>
+      <div class="col-sm-10">
+        <input type="time" class="form-control" id="time" name="time" value="<?php
+                                if(isset($time)){
+                                    echo $time;
+                                }
+                          ?>" >
+        <span style="color:red;">
+              <?php
+                if(isset($time_err)){
+                  echo $time_err;
+                }
+              ?>
+        </span>
+      </div>
+          
+    </div>
     
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" name="bookapp" class="btn btn-default">Submit</button>
+        <button type="submit" name="bookapp" class="btn btn-default">Book an apoointment</button>
       </div>
     </div>
 
@@ -257,7 +384,6 @@ if(isset($_POST['bookapp'])){
 	<?php require_once 'body/footer.php' ?>
 </footer>
   <!-- SCRIPTS -->
-  
   <!-- JQuery -->
   <script type="text/javascript" src="bootstrap/js/jquery-3.3.1.min.js"></script>
   <!-- Bootstrap tooltips -->
@@ -266,8 +392,18 @@ if(isset($_POST['bookapp'])){
   <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="bootstrap/js/mdb.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="script/service.js"></script>
-
 </body>
 </html>
+
+
+<!--<form action="" method="post">
+    <input type="hidden" name="aid" value="<?= $id; ?>" />
+    Name: <input type="text" name="name" value="<?= $name; ?>" /><br/>
+    Email: <input type="text" name="email" value="<?= $email; ?>"/><br />
+    Phone: <input type="text" name="phone" value="<?= $phone; ?>"/><br />
+    Service: <input type="text" name="service" value="<?= $service; ?>"/><br />
+    Date: <input type="date" name="date" value="<?= $date; ?>"/><br />
+    Time: <input type="time" name="time" value="<?= $time; ?>"/><br />
+    <input type="submit" name="updateappointment" value="Update Appointment">
+</form>-->

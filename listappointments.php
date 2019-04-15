@@ -1,7 +1,7 @@
 <?php
 
 require_once 'class/Appointment.php';
-require_once 'menu/Database.php';
+require_once 'database/Database.php';
 
 $dbcon = Database::getDb();
 $s = new Appointment();

@@ -43,9 +43,10 @@ function loginForm() {
 if (isset ( $_POST ['enter'] )) {
     if ($_POST ['name'] != "") {
         $_SESSION ['name'] = stripslashes ( htmlspecialchars ( $_POST ['name'] ) );
+        $_SESSION ['email'] = $_POST ['email'];
         //save username and email-id in database
         $name = $_SESSION ['name'];
-        $email = $_POST ['email'];
+        $email = $_SESSION ['email'];
         $flag = 0;
 
         if($name == ""){
@@ -106,22 +107,24 @@ if (isset ( $_GET ['logout'] )) {
 <div id="wrapper">
 	<div id="menu">
 	<h1>Simple Live Chat!</h1><hr/>
-		<p class="welcome"><b>HI - <a><?php echo $_SESSION['name']; ?></a></b></p>
+		<p class="welcome"><b>HI - <a><?php echo $_SESSION['name']; echo $_SESSION['email'];?></a></b></p>
 		<p class="logout"><a id="exit" href="#" class="btn btn-default">Exit Live Chat</a></p>
 	<div style="clear: both"></div>
 	</div>
 	<div id="chatbox">
 	<?php
 
-		/*if (file_exists ( "log.html" ) && filesize ( "log.html" ) > 0) {
-		$handle = fopen ( "log.html", "r" );
-		$contents = fread ( $handle, filesize ( "log.html" ) );
-		fclose ( $handle );
-		echo $contents;
-		}*/
+        //get old messages by email
+		 $c = new Chat();
+         $m = $c->getMessageByVisitorId(1,$db);
+         foreach($m as $message){
+            echo $message->message;
+         }
+
 	?>
 	</div>
 <form name="message" action="">
+    <input type='hidden' name = 'id' value="<?php $_SESSION['email']; ?>" />
 	<input name="usermsg" class="form-control" type="text" id="usermsg" placeholder="Create A Message" />
 	<input name="submitmsg" class="btn btn-default" type="submit" id="submitmsg" value="Send" />
 </form>
@@ -136,11 +139,28 @@ $(document).ready(function(){
     });
 });
 $("#submitmsg").click(function(){
+    alert();
     //save messages to database
-        var clientmsg = $("#usermsg").val();
-        $.post("post.php", {text: clientmsg});             
-        $("#usermsg").attr("value", "");
-        loadLog;
+    if ($_POST ['usermsg'] != "") {
+        $c = new Chat();
+        //need to fix it....figure it out how to get visitor_id
+
+        $vis = $c->getVisitorByEmail($_POST['id'],$db);
+        $visitor_id = $vis->id;
+        alert($visitor_id);
+        $message = $_POST ['usermsg'];
+        $datetime = new DateTime();
+
+
+        $count = $c->addMessage($visitor_id,$message,$datetime->format('Y-m-d H:i:s'),$db);
+
+        if($count){
+            $response_msg = "Message added successfully";
+        }else{
+            $response_msg = "Error in adding message";
+        }
+    }
+        
     return false;
 });
 function loadLog(){    
