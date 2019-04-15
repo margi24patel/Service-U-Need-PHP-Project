@@ -31,5 +31,27 @@ $(document).ready(function(){
                 $('#subservice').html('<option value="">Select service first</option>');
             }       
             });
+
+    $('#subservice').change(function(){
+        alert();
+                var serviceproviderID = $(this).val();
+                if(serviceproviderID){
+                $.ajax({
+                type:'POST',
+                url:'showproviders.php',
+                data:'service_id='+serviceproviderID,
+                success:function(html){
+                    $('#serviceprovider').html(html);
+                    }
+                }); 
+            }
+            else{
+                $('#serviceprovider').html('<option value="">Select sub service first</option>');
+            }       
+            });
+
+
+
+
     });
 

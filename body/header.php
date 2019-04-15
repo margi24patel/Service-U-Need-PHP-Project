@@ -14,7 +14,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
 
 
 ?>  
-  
   <!-- Header -->
   <header class="bg-dark">
     <nav class="navbar navbar-expand-lg navbar-dark static-top">
@@ -78,5 +77,3 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
       </div>
 </div>
 </header>
-
-
