@@ -10,4 +10,14 @@
 }
 h3{
     text-align: center;
+    font-size: 18px;
+}
+#faq-main{
+     display:flex;
+     background-color: #d1ffea;
+}
+#que-ans{
+    margin-top:50px;
+    margin-right:10px;
+    
 }

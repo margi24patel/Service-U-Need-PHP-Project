@@ -79,7 +79,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
 </div>
 </header>
 
-<header>
+<!--header>
 	<nav>
 		<div class="wrapper">
 			<div id="top-logo">
@@ -135,5 +135,5 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
 				<?php endforeach; ?>
 		</div>
 	</nav>		
-</header>
+</header-->
 
