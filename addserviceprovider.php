@@ -1,7 +1,7 @@
 <?php
 
-require_once 'class/ServiceProviderRegistration.php';
-require_once 'class/Menu.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/ServiceProviderRegistration.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
 
 $db = Database::getDb();

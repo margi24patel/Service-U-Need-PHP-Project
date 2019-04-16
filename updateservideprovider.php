@@ -1,8 +1,8 @@
 <?php
-require_once 'menu/Database.php';
+require_once 'database/Database.php';
 require_once  'class/ServiceProviderRegistration.php';
 
-$name = $email = $program = $service = $date = $time = "";
+$name = $email = $phone = $city = "";
 
 if(isset($_POST['id'])){
     $id= $_POST['id'];
@@ -14,8 +14,7 @@ if(isset($_POST['id'])){
     $name =  $serviceprovider->name;
     $email = $serviceprovider->email;
     $phone = $serviceprovider->phone;
-    $service = $serviceprovider->service;
-    $date = $serviceprovider->city;
+    $city = $serviceprovider->city;
 
 
 }
@@ -24,8 +23,8 @@ if(isset($_POST['updateserviceprovider'])){
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
-    $service = $_POST['service'];
-    $date = $_POST['city'];
+    $service = $_POST['subservice'];
+    $city = $_POST['city'];
 
     $db = Database::getDb();
     $a = new Appointment();
@@ -34,7 +33,7 @@ if(isset($_POST['updateserviceprovider'])){
     if($count){
        header('Location:  listserviceproviders.php');
     } else {
-        echo "problem";
+        echo "problem updating service provider detail";
     }
 }
 
@@ -69,12 +68,6 @@ if(isset($_POST['updateserviceprovider'])){
 <main>
     <div class="container">
   <h2>Service Provider</h2>
-  
-  
-  <div class="view overlay z-depth-1-half">
-    <img src="images/bookappointment_banner.jpg" alt="banner_ServiceProvider" class="card-img-top img-fluid">
-    <div class="mask rgba-white-light"></div>
-  </div>
    
 
   <form class="form-horizontal" action="" method="post">
@@ -100,13 +93,56 @@ if(isset($_POST['updateserviceprovider'])){
     <div class="form-group">
       <label class="control-label col-sm-2" for="service">Service</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="service" placeholder="Enter Service" name="service" value="<?= $service; ?>">
+        <?php
+          $b = new Menu();
+
+          $mymenu = $b->getAllMenus(Database::getDb());
+
+        ?>
+        <select name="service" id="service">
+          <?php $categories = array(); ?>
+          <?php 
+          echo "<option class='dropbtn' value=''>--Select service--</option>";
+          foreach($mymenu as $menu)
+          {
+            echo "<option class='dropbtn' value= '$menu->id'>$menu->name</option>"; 
+          }    
+          ?>
+          </select>
+      
+        
+        <span style="color:red;">
+              <?php
+                if(isset($service_err)){
+                  echo $service_err;
+                }
+              ?>
+        </span>
       </div>
     </div>
     <div class="form-group">
+      <label class="control-label col-sm-2" for="subservice">Sub Service</label>
+      <div class="col-sm-10">
+        <select name="subservice" id="subservice">
+
+
+        </select>
+      
+        
+        <span style="color:red;">
+              <?php
+                if(isset($service_err)){
+                  echo $service_err;
+                }
+              ?>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label class="control-label col-sm-2" for="city">City</label>
       <div class="col-sm-10">
-        <input type="date" class="form-control" id="city" name="city" value="<?= $city; ?>">
+        <input type="text" class="form-control" id="city" name="city" value="<?= $city; ?>">
       </div>
     </div>
     
@@ -131,5 +167,6 @@ if(isset($_POST['updateserviceprovider'])){
   <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="bootstrap/js/mdb.js"></script>
+  <script type="text/javascript" src="script/service.js"></script>
 </body>
 </html>
