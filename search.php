@@ -8,19 +8,31 @@ $s = new Search();
 
 echo "<br/>";
 // Search Services , SubServices and Service Providers by name:
-if(isset($_GET['keywords']) && $_GET['keywords'] != '') 
+if(isset($_GET['keywords']) ) 
 {
-    $search_by_name =  $s->searchByName(Database::getDb(), $_GET['keywords']);
-    
-    foreach($search_by_name as $s) {
-     echo "<a href = '$s->name'>" .  $s->name ."</a>";
-    }
-} 
+    //elseif(empty($_GET['keywords'])){
+if($_GET['keywords']== ""){
+    echo "Please enter keyword";
+}
 
 else
 {
-    echo "Please Enter Search Query";
+    $search_by_name =  $s->searchByName(Database::getDb(), $_GET['keywords']);
+    //var_dump($search_by_name);
+    
+    
+    if(empty($search_by_name)){
+        echo "no results found";
+    }
+    foreach($search_by_name as $s) {
+     echo "<a href = '$s->name'>" .  $s->name ."</a>"."</br>";
+    }
+    //echo "Please Enter Search Query";
 }
+
+    
+} 
+
 
 
  ?>
