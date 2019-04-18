@@ -52,7 +52,15 @@ Files:
 	chatstyle.css
 Screenshot: 
 
-
+Feature: FAQ 
+Author: Jetal Tandel 
+Files:
+	faq.php
+	faqadd_admin.php
+	listfaqs_admin.php
+	listappointments.php
+	deleteappointment.php
+Screenshot:
 
 
 

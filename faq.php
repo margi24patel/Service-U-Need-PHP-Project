@@ -15,7 +15,6 @@
   <script src="javascript/script.js"></script>
 
   <!-- jetal part for links and scripts -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script type="text/javascript" src="script/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="script/faq.js" ></script>
   <!-- Your custom styles (optional) -->
@@ -33,6 +32,7 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
 <main id="faq-main">
     <div><img src="images/faq_icon.png" alt="faq icon image"></div>
      <div class="container">
+       <h2>List FAQ.</h2>
       <div class="row">
         <?php
           require_once 'database/Database.php';
@@ -44,7 +44,8 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
 
           foreach($faqs as $addedfaq)
            {//print question and answer.
-             echo  '<h3>'.'<a>'. $addedfaq->questions .'</a>'.'</h3>'."<li class='list-group-item'>". $addedfaq->answers .'</li>' ;
+             //echo  '<h3>'.'<a>'. $addedfaq->questions .'</a>'.'</h3>'."<li class='list-group-item'>". $addedfaq->answers .'</li>' ;
+             echo  '<h2 id="heading">'.'<a id="faqlink">'. $addedfaq->questions .'</a>'.'</h2>'.'<b>'. $addedfaq->answers .'</b>' ;
             }
         ?>  
      </div>
