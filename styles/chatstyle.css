@@ -62,7 +62,7 @@
 }
 
 .panelContainer{
-  background: #523C1E;
+  background: #f1f1f1;
   width: 80%;
   margin: 0 auto;
 }
@@ -72,7 +72,7 @@
   color: #2a6171;/*Paragraph font colour*/
 }
 
-h2{
+h3{
   margin-bottom: 2px;
   padding: 3px 0 2px 25px;
   background: #75cac3;

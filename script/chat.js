@@ -8,11 +8,9 @@ function closeForm() {
 
 
 jQuery(document).ready(function() {
-//alert();
-$("p").hide();	
+/*$("p").hide();	
 	
-$("h2").click(function(){
-	//alert();
+$("h3").click(function(){
 	$("p").hide();
 	$(this).next('p').slideToggle(3000);
 		
@@ -21,6 +19,24 @@ $("h2").click(function(){
 $("p").hover(
 	function(){$('p').css({'background':'#d7f7f5', 'color':'#000'});},
 	function(){$('p').css({'background':'#2a6171', 'color':'#d7f7f5'});},
-);
+);*/
+
+
+
+
+$('p').hide();
+	
+	$("p").hover(
+		function(){$('p').css({'background':'#2a6171', 'color':'#d7f7f5'});},
+		function(){$('p').css({'background':'#d7f7f5', 'color':'#000'});},
+	);
+	
+	$('h3').click(function(){
+		$('p').hide();
+		$(this).next('p').show();
+	});
+	
+
+
 
 });

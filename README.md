@@ -1,6 +1,66 @@
 # project-merj-2019
 project-merj-2019 created by GitHub Classroom
 
+Feature: 
+Author: 
+Files: 
+Screenshot: 
+
+Common Files for all features: 
+	Database.php
+	config.php
+	customerror.php
+
+Feature: Book an appointment 
+Author: Ekta Patel 
+Files:
+	Appointment.php
+	bookanappointment.php
+	updateappointment.php
+	listappointments.php
+	deleteappointment.php
+Screenshot:
+
+
+
+
+
+Feature: Service Provider Registration
+Author: Ekta Patel
+Files:
+	ServiceProviderRegistration.php
+	addserviceprovider.php
+	listserviceproviders.php
+	listserviceproviders_admin.php
+	showsub.php
+	updateservideprovider.php
+	deleteserviceprovider.php
+	jquery.min.js
+	service.js
+Screenshot:
+
+
+
+
+
+Feature: Chat
+Author: Ekta Patel
+Files: 
+	chat.php
+	chat.js
+	jquery-3.3.1.js
+	chatstyle.css
+Screenshot: 
+
+
+
+
+
+
+
+
+
+
 
 Rabih Aoun: April 1, 2019 Working on organizing the contents of the project.
 Rabih Aoun: April 1, 2019 Working on Blog feature style sheet.
