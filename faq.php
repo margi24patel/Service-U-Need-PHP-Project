@@ -36,7 +36,7 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
       <div class="row">
         <?php
           require_once 'database/Database.php';
-          require_once 'database/faq/FAQ.php';
+          require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/FAQ.php');
 
           $db = Database:: getdb();
           $faq = new FAQ();

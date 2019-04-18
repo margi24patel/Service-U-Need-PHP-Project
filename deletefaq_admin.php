@@ -1,6 +1,6 @@
 <?php
     require_once 'database/Database.php';
-    require_once 'database/faq/FAQ.php';
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/FAQ.php');
 
 
 //Delete faq by faqid.

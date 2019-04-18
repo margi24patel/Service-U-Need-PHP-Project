@@ -1,16 +1,18 @@
 <?php
-require_once 'class/Menu.php';
+require_once 'class/ServiceProviderRegistration.php';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
           if(!empty($_POST["service_id"])){
-            $sb = new Submenu();
+            $sb = new ServiceProviderRegistration();
 
-            $mysubmenu = $sb->getAllSubMenus(Database::getDb(),$_POST["service_id"]);
+            $mysubmenu = $sb->getServiceProviderBySubserviceId($_POST["service_id"],Database::getDb());
             $str="";
 	    foreach($mysubmenu as $submenu) {
               $str.='<option value="'.$submenu->id.'">'.$submenu->name.'</option>';
             }
           }else{
-            $str.='<option value="">Subservice not available</option>';
+            $str.='<option value="">Servie provider not available</option>';
           }
 	  echo $str;	
-          ?>
+?>
+
+

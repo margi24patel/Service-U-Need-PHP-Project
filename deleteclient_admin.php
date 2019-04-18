@@ -1,6 +1,6 @@
 <?php
  require_once 'database/Database.php';
- require_once 'database/clientregistration/Client.php';
+ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Client.php');
 
 //delete client by clientid
 if(isset($_POST['id']))

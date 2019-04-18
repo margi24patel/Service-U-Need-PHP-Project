@@ -26,6 +26,14 @@ class Submenu{
 		return $submenus; 		
 
 	}
+
+	public function getSubMenuById($db,$id){
+        $sql = "SELECT * FROM sub_services where id = :id";
+        $pst = $db->prepare($sql);
+        $pst->bindParam(':id', $id);
+        $pst->execute();
+        return $pst->fetch(PDO::FETCH_OBJ);
+    }
 }
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
-require_once 'class/Appointment.php';
-require_once 'class/Menu.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/ServiceProviderRegistration.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
 
 $db = Database::getDb();
@@ -68,7 +68,7 @@ if(isset($_POST['bookapp'])){
   $date_err = validate($date);
   $time_err = validate($time);*/
 
-  $a = new Appointment();
+  $a = new ServiceProviderRegistration();
   if($flag == 0){
     $c = $a->addServiceProvider($name,$phone,$email,$subservice,$city,$db);
     if($c){
@@ -105,7 +105,8 @@ if(isset($_POST['bookapp'])){
 <body>
 <!-- header.php -->
 
-	<?php require_once 'body/header.php' ?>
+	<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
+
 
 <main>
 	<div class="container">
@@ -182,7 +183,7 @@ if(isset($_POST['bookapp'])){
         <select name="service" id="service">
           <?php $categories = array(); ?>
           <?php 
-
+          echo "<option class='dropbtn' value=''>--Select service--</option>";
           foreach($mymenu as $menu)
           {
             echo "<option class='dropbtn' value= '$menu->id'>$menu->name</option>"; 
@@ -253,9 +254,8 @@ if(isset($_POST['bookapp'])){
 </div>
 </main>
 <!-- footer.php -->
-<footer>
-	<?php require_once 'body/footer.php' ?>
-</footer>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
+
   <!-- SCRIPTS -->
   
   <!-- JQuery -->
@@ -267,6 +267,7 @@ if(isset($_POST['bookapp'])){
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="bootstrap/js/mdb.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="javascript/script.js"></script>
   <script type="text/javascript" src="script/service.js"></script>
 
 </body>
