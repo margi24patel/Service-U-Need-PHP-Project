@@ -35,8 +35,20 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
 	    <label for="msg"><b>Message</b></label>
 	    <div class="log" name="msg">
 	    	<div class="panelContainer"><!-- 1ST PANEL-->
-				<h2>Do I need a website?</h2>
-				<p class="contentBox">Morbi hendrerit accumsan orci, tristique aliquam nunc suscipit nec. Vestibulum consequat ornare nunc, ac tristique urna cursus id. Cras eu viverra leo, vitae rhoncus dui. Vestibulum rutrum neque ac risus eleifend luctus. </p>
+				<?php
+		          require_once 'database/Database.php';
+		          require_once 'database/faq/FAQ.php';
+
+		          $db = Database:: getdb();
+		          $faq = new FAQ();
+		          $faqs =  $faq->getAllFAQs($db);
+
+
+		          foreach($faqs as $addedfaq)
+		           {//print question and answer.
+		             echo  '<h3>'.  $addedfaq->questions.'</h3>'."<p class='contentBox'>". $addedfaq->answers .'</li>' ;
+		            }
+		        ?>
 			</div>
 
 	    </div>
@@ -49,7 +61,7 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
 
 <!-- footer -->
 <footer>
-	<?php require_once 'body/footer.php' ?>
+	<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
 </footer>
 <script type="text/javascript" src="script/chat.js"></script>
 </body>

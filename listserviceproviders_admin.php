@@ -86,13 +86,13 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
             "<td>" . $serviceprovider->city. "</td>" .
             "<td>" . 
               	"<form action='database/serviceprovider/deleteserviceprovider.php' method='post'>".
-				"<input type='hidden' name='id' value='$serviceprovider->id' />".
-				"<input class='btn btn-primary float-left' type='submit' name='delete' value='Delete' />".
-				"</form>".
-				"<form action='updateservideprovider.php' method='post'>".
-				"<input type='hidden' name='id' value='$serviceprovider->id'>".
-				"<input class='btn btn-primary float-right' type='submit' name='update' value='Update' />".
-				"</form>".
+    				"<input type='hidden' name='id' value='$serviceprovider->id' />".
+    				"<input class='btn btn-primary float-left' type='submit' name='delete' value='Delete' />".
+    				"</form>".
+    				"<form action='updateservideprovider.php' method='post'>".
+    				"<input type='hidden' name='id' value='$serviceprovider->id'>".
+    				"<input class='btn btn-primary float-right' type='submit' name='update' value='Update' />".
+    				"</form>".
             "</td>" .
           "</tr>";
         }
