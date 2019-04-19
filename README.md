@@ -58,9 +58,42 @@ Files:
 	faq.php
 	faqadd_admin.php
 	listfaqs_admin.php
-	listappointments.php
-	deleteappointment.php
+	updatefaq_admin.php
+	deletefaq_admin.php
+      FAQ.php (class file)
+      faqstyle.css
+      faq.js
+      
 Screenshot:
+
+Feature: Subscribe 
+Author: Jetal Tandel 
+Files:
+	subcribe.php
+	listsubscriber_admin.php
+	deletesubscriber_admin.php
+      subscribe.css
+      Subscriber.php (class file)
+      
+      
+Screenshot:
+
+
+Feature: Client registration 
+Author: Jetal Tandel 
+Files:
+	clientregistration.php
+	listclients_admin.php
+	deleteclient_admin.php
+      clientregistration.css
+      Client.php (class file)
+      login.php
+      
+      
+Screenshot:
+
+
+
 
 
 
