@@ -13,30 +13,7 @@
 <main>
   <div class="wrapper">
     <!-- Sidebar -->
-    <nav id="sidebar" class="bg-secondary">
-      <div class="sidebar-header ">
-        <h2>Admin Panel</h2>
-      </div>
-
-      <ul class="list-unstyled components">
-        <h3>Pages</h3>
-        <li class="active">
-          <a href="blogAdmin.php">Blogs</a>
-        </li>
-        <li class="active">
-          <a href="#careerSubmenu">Careers</a>
-        </li> 
-        <li class="active">
-          <a href="#serviceSubmenu">Services</a>
-        </li>
-        <li class="active">
-          <a href="#reviewSubmenu">Reviews</a>
-        </li>
-        <li class="active">
-          <a href="listserviceproviders_admin.php">Service Providers</a>
-        </li>             
-      </ul>
-    </nav>
+    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/adminSidePanel.php'); ?>
 
     <div class="container">
       <div class="text-center">
