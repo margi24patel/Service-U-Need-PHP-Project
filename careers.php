@@ -1,64 +1,65 @@
 
-<!--Career Page Client Side (list of jobs) -->
-<?php
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/careers.css">
 
+</head>
 
-        
-echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>";
+<body class="container" style="padding-left: 0px;
+padding-right: 0px; margin: 0 auto; width: 1200px;">
 
-echo "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>";
-
-echo "<!-- Font Awesome -->
-          <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>";
-     
-    //Margi - Custom files
-echo "<link rel='stylesheet' href='styles/careers.css'>";
-
-echo "<link rel='stylesheet' type='text/css' href='styles/style.css'>";
-
-?>
 
 <!-- header -->
-<?php require_once 'body/header.php' ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
 
 <!-- main -->
 <main id="career_main">
-
 <?php
-//Database
 
-//require_once 'DatabaseEmployeesCareer.php';
-require_once 'database/Database.php';
-require_once 'class/JobPosition_admin.php';
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/JobPosition_admin.php');
 
-//$dbcon = DatabaseEmployeesCareer::getDb();
 $dbcon = Database::getDb();
 $j = new JobPosition_admin();
-//$myjobposition =  $j->getAllJobPositions(DatabaseEmployeesCareer::getDb());
+
 $myjobposition =  $j->getAllJobPositions(Database::getDb());
 
 ?>
 <!-- Html part -->
-<h1>Open Positions</h1>
-    
-    
+<div class="text-center">
+ <h1>Build the future of Services</h1>
+</div>  
 <div class="container-fluid">
-  <h2>Apply For A Job</h2>
+
+ <div class="view overlay z-depth-1-half">
+    <img src="images/careerbanner.jpg" alt="Career Banner Image" class="card-img-top img-fluid">
+    <div class="mask rgba-white-light"></div>
+  </div>
   <p> we're looking for hard-working, passionate people to help us create the next million jobs in Canada.</p>
-    <h3>Positions</h3>
+    <div class="text-center">
+    <h2>Open Positions</h2>
+    </div>
     <div class="row">
 <?php 
     foreach($myjobposition as $position){
-        echo "<div class='col-sm-3 col-md-4'>" . 
+        echo "<div class='col-sm-6 col-md-6'>" . 
                     "<h3>" . "Job Title: " .  $position->job_title . "</h3>" . "<br>".
-                        "Location Name: " . $position->location_name . "<br>".
-                        "Skill Requirements: " .  $position->skill_requirements . "<br>".
-                        "Job Requirements: " .  $position->job_requirements . "<br>" .
-                        "Description: " .  $position->description . "<br>" .    
-                        "Salary: " .  $position->salary . "<br>" .
-                        "Job Type: " .  $position->job_type .
+                        "<b>" . "Location Name: " . "</b>" . $position->location_name . "<br>".
+                        "<b>" . "Skill Requirements: " . "</b>" . $position->skill_requirements . "<br>".
+                        "<b>" . "Job Requirements: " . "</b>" .  $position->job_requirements . "<br>" .
+                        "<b>" . "Description: " . "</b>".  $position->description . "<br>" .    
+                        "<b>" . "Salary: " . "</b>" .  $position->salary . "<br>" .
+                        "<b>" . "Job Type: " . "</b>" .  $position->job_type .
                     
             "<div class='applay-job'>" .    
                     "<form action='addEmployeeForm.php' method='post' class='form-horizontal'>".
@@ -73,8 +74,7 @@ $myjobposition =  $j->getAllJobPositions(Database::getDb());
     </div>
 </div>
 </main>
-
-<!-- footer -->
-<footer>
-	<?php require_once 'body/footer.php' ?>
-</footer>
+    	<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
+    </body>
+    <!-- footer -->
+</html>
