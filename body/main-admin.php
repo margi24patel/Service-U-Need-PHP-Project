@@ -21,7 +21,7 @@
           <a href="#reviewSubmenu">Reviews</a>
         </li> 
         <li class="active">
-          <a href="#reviewSubmenu">FAQ</a>
+          <a href="listfaqs_admin.php">FAQ</a>
         </li>              
       </ul>
     </nav>
