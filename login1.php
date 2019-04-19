@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   }
 
   if(empty($username_err) && empty($password_err)){
-    $sql = "SELECT id, username, password FROM users WHERE username = :username";
+    $sql = "SELECT id, username, user_type, password FROM users WHERE username = :username";
 
     if($stmt = $dbcon->prepare($sql)){
       $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
@@ -70,6 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           if($row = $stmt->fetch()){
             $id= $row["id"];
             $username = $row["username"];
+            $user_type = $row["user_type"];
             $hashed_password = $row["password"];
 
             if(password_verify($password, $hashed_password)){
@@ -80,6 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               $_SESSION["loggedin"] = true;
               $_SESSION["id"] = $id;
               $_SESSION["username"] = $username;
+              $_SESSION["user_type"] = $user_type;
               ?>  
               <script type="text/javascript">
               window.location.href = 'welcome.php';

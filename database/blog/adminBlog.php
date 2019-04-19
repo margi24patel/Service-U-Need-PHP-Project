@@ -72,6 +72,9 @@
         ?>
         </tbody>
       </table>
+      <div class="text-center">
+        <a href="admin.php" class="btn btn-primary w-25 p-3 m-5">Back to Admin Panel</a>
+      </div> 
   </div>
 </div>
   </div>

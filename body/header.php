@@ -19,7 +19,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
     <nav class="navbar navbar-expand-lg navbar-dark static-top">
       <div class="container">
         <a class="navbar-brand" href="index.php">
-              <img src="images/Service-logo.png" alt="">
+              <img src="images/Service-logo1.png" alt="">
             </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>

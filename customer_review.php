@@ -17,12 +17,21 @@
 padding-right: 0px; margin: 0 auto; width: 1200px;">
 <!-- header.php -->
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
-
+<?php 
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+  ?>
+  <script type="text/javascript">
+  window.location.href = "login1.php";
+  </script>  
+<?php
+    exit;
+}
+?>
 <!-- main -->
 <main id="customer_review_main">
 <div class="container">
   <h1>Customer Reviews</h1>
-  <h2>Write your Reviews</h2>
+  <h2><?php echo htmlspecialchars($_SESSION["username"]); ?></h2>
     
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');

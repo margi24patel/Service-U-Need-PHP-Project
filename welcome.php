@@ -15,25 +15,47 @@
 
 <body class="container" style="padding-left: 0px;
 padding-right: 0px; margin: 0 auto; width: 1200px; text-align:center;">
-<!-- header.php -->
+<!-- header -->
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
 <?php
+// it will redirect to login page if we dont have the login or register information in a session.
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login1.php");
     exit;
 }
 ?>
-<!-- main.php -->
+<!-- main -->
 
     <div class="page-header">
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
     </div>
     <p>
-        <a href="admin.php" class="btn btn-primary">Admin Panel </a>
-        <a href="logout.php" class="btn btn-danger" style="background-color:red;">Sign Out of Your Account</a>
+    <?php
+    // if user type is user then it will show Home page button that will redirect to index.php
+    // else user type will be admin then it will have admin panel button that will redirect to admin.php
+        if($_SESSION["user_type"] == "user"){
+            ?>
+                <a href="index.php" class="btn btn-primary">Home Page </a>
+                <a href="logout.php" class="btn btn-danger" style="background-color:red;">Sign Out of Your Account</a>        
+            <?php
+        }
+        else if($_SESSION["user_type"] == "admin"){
+            ?>
+                <a href="admin.php" class="btn btn-primary">Admin Panel </a>
+                <a href="logout.php" class="btn btn-danger" style="background-color:red;">Sign Out of Your Account</a>        
+            <?php
+        }
+        else{
+            ?>
+                <a href="index.php" class="btn btn-primary">Home Page </a>
+                <a href="logout.php" class="btn btn-danger" style="background-color:red;">Sign Out of Your Account</a>        
+            <?php           
+        }
+    ?>
     </p>
 
+<!-- footer -->
     <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>    
 </body>
 </html>

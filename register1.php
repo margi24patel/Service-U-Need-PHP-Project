@@ -13,7 +13,8 @@
   <script src="javascript/script.js"></script>
 </head>
 
-<body class="container">
+<body class="container" style="padding-left: 0px;
+padding-right: 0px; margin: 0 auto; width: 1200px">
 <!-- header.php -->
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
@@ -141,6 +142,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // we need to get the id and username since we will need to show the username value in some of the pages.
         $_SESSION["id"] = $id;
         $_SESSION["username"] = $username;
+        $_SESSION["user_type"] = $user_type;
       ?>
         <!-- if all requirements are met for registeration, redirect to welcome page -->
         <script type="text/javascript">
@@ -186,8 +188,8 @@ function display_error() {
       <input type="text" name="username" value = "<?php echo $username; ?>">
     </div>  
 
-    <div class="input-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>" >
-      <label>Email</label>
+    <div class="input-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>" >
+      <label>E-mail</label>
       <input type="text" name="email" value = "<?php echo $email; ?>">
     </div>      
 
