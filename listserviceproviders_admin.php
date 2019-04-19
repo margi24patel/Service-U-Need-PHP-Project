@@ -58,6 +58,9 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
         </li>
         <li class="active">
           <a href="#reviewSubmenu">Reviews</a>
+        </li> 
+        <li class="active">
+          <a href="#">Service Providers</a>
         </li>              
       </ul>
     </nav>

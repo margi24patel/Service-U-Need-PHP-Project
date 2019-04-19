@@ -31,7 +31,7 @@ $('p').hide();
 		function(){$('p').css({'background':'#d7f7f5', 'color':'#000'});},
 	);
 	
-	$('h3').click(function(){
+	$('h6').click(function(){
 		$('p').hide();
 		$(this).next('p').show();
 	});

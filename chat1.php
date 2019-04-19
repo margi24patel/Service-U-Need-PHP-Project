@@ -18,14 +18,11 @@
 padding-right: 0px; margin: 0 auto; width: 1200px;">
 <!-- header.php -->
 
-<!-- header -->
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
+	<?php require_once 'body/header.php' ?>
 
-
-<!-- main -->
+<!-- main.php -->
 <main>
 	<!-- <button class="open-button" onclick="openForm()">Chat</button> -->
-	
 	<input type="image" src="images/chaticon.gif" class="chat-button" alt="Submit" onclick="openForm()">
 
 	<div class="chat-popup" id="myForm">
@@ -34,34 +31,19 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
 
 	    <label for="msg"><b>Message</b></label>
 	    <div class="log" name="msg">
-	    	<div class="panelContainer"><!-- 1ST PANEL-->
-				<?php
-		          require_once 'database/Database.php';
-		          require_once 'class/FAQ.php';
-
-		          $db = Database:: getdb();
-		          $faq = new FAQ();
-		          $faqs =  $faq->getAllFAQs($db);
-
-
-		          foreach($faqs as $addedfaq)
-		           {//print question and answer.
-		             echo  '<h6>'.  $addedfaq->questions.'</h6>'."<p class='contentBox'>". $addedfaq->answers .'</p>' ;
-		            }
-		        ?>
-			</div>
-
+	    	<div class="panelContainer">
+	    		
+	    	</div>
 	    </div>
 
-	    <!--button type="submit" class="btn">Send</button-->
+	    
 	    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
 	  </form>
 	</div>
 </main>
-
-<!-- footer -->
+<!-- footer.php -->
 <footer>
-	<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
+	<?php require_once 'body/footer.php' ?>
 </footer>
 <script type="text/javascript" src="script/chat.js"></script>
 </body>

@@ -31,7 +31,10 @@
         </li>
         <li class="active">
           <a href="#reviewSubmenu">Reviews</a>
-        </li>              
+        </li>
+        <li class="active">
+          <a href="listserviceproviders_admin.php">Service Providers</a>
+        </li>             
       </ul>
     </nav>
 

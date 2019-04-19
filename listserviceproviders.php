@@ -4,6 +4,8 @@ require_once 'class/ServiceProviderRegistration.php';
 require_once 'database/Database.php';
 //get sub_service_id from submenu link
 $id = 4;
+
+//$id = $_GET['id'];
 $dbcon = Database::getDb();
 $s = new ServiceProviderRegistration();
 $myserviceprovider = $s->getServiceProviderBySubserviceId($id,$dbcon);
