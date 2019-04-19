@@ -1,0 +1,24 @@
+#signup_section{
+   background-color:#4c4c51;
+   color:white;
+  }
+.form-control{
+    border:2px solid black;
+    border-radius:10px;
+  }
+
+  #submit_btn{
+     border:2px solid black;
+    border-radius:10px; 
+    padding:5px;
+    margin-top:10px;
+    left:30;
+     
+ }
+ #submit_btn:hover{
+    background-color:#5F9EA0;
+ }
+ #heading{
+  margin-left: 70px;
+ }
+ 

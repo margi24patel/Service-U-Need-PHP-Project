@@ -44,10 +44,49 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
             </li>
             <li class="nav-item">
               <div class="span12">
-                <form id="custom-search-form" class="form-search form-horizontal pull-right">
+                  
+                  
+                <form id="custom-search-form" class="form-search form-horizontal pull-right" method="get">
                     <div class="input-append span12">
-                        <input type="text" class="search-query" placeholder="Search">
-                        <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                        <input type="text" class="search-query" placeholder="Search" name="keywords" autocomplete="off">
+                        <button type="submit" class="btn" value="Search"><i class="fa fa-search"></i></button>
+                    </div>
+                    <div class="search-result" style="background-color:white;">
+                    
+                    <?php
+                        require_once 'database/Database.php';
+                        require_once 'class/Search.php';
+
+                        $dbcon = Database::getDb();
+                        $s = new Search();
+
+                        //echo "<br/>";
+                        // Search Services , SubServices and Service Providers by name:
+                        if(isset($_GET['keywords']) ) 
+                        {
+
+                            if($_GET['keywords']== "")
+                            {
+                                echo "Please enter keyword";
+                            }
+
+                            else
+                            {
+                                $search_by_name =  $s->searchByName(Database::getDb(), $_GET['keywords']);
+                                //var_dump($search_by_name);
+
+                                if(empty($search_by_name))
+                                {
+                                    echo "no results found";
+                                }
+                                foreach($search_by_name as $s) 
+                                {
+                                 echo "<a href = '$s->name'>" .  $s->name ."</a>"."</br>";
+                                }
+
+                            } 
+                          }   
+                        ?>
                     </div>
                 </form>
             </div>

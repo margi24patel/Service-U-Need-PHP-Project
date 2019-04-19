@@ -19,7 +19,10 @@
         </li>
         <li class="active">
           <a href="#reviewSubmenu">Reviews</a>
-        </li>               
+        </li> 
+        <li class="active">
+          <a href="#reviewSubmenu">FAQ</a>
+        </li>              
       </ul>
     </nav>
 

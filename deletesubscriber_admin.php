@@ -1,7 +1,9 @@
 <?php  
 
-  require_once 'menu/Database.php';
-  require_once 'database/subscribe/Subscriber.php';
+
+  require_once 'database/Database.php';
+  require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Subscriber.php');
+
 
    if(isset($_POST['id']))
    {
