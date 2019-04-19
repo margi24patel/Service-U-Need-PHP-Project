@@ -1,0 +1,22 @@
+#customer_review_main{
+   background-color: #fff; 
+   padding-top:15px;
+   padding-left:5px;
+ }
+
+h1{
+    text-align: center;
+}
+
+label{
+    font-size: 1.3em;
+}
+
+.radio_btn{
+    margin-left: 100px;
+}
+
+.para{
+    font-size: 1.0em;
+    font-weight: bold;
+}
