@@ -104,7 +104,7 @@ Screenshot:
 Feature: Search 
 Author: Margi Patel
 Files:
-        Search.php (class file)
+        Search.php (class file),
         search.php
 
 
@@ -116,17 +116,17 @@ Screenshot:
 Feature: Career 
 Author: Margi Patel
 Files:
-        Employee_client.php (class file)
-        JobPosition_admin.php (class file)
-        listJobPostsAdmin.php
-        addJobPostAdmin.php
-        editJobPostAdmin.php
-        deleteJobPostAdmin.php
-        careers.php
-        addEmployeeForm.php
-        deleteEmployeeAdmin.php
-        listEmployeesAdmin.php
-        addEmployeeForm.css (css file)
+        Employee_client.php (class file),
+        JobPosition_admin.php (class file),
+        listJobPostsAdmin.php,
+        addJobPostAdmin.php,
+        editJobPostAdmin.php,
+        deleteJobPostAdmin.php,
+        careers.php,
+        addEmployeeForm.php,
+        deleteEmployeeAdmin.php,
+        listEmployeesAdmin.php,
+        addEmployeeForm.css (css file),
         careers.css (css file)
 
 Screenshot:
@@ -138,13 +138,13 @@ Screenshot:
 Feature: Customer Review 
 Author: Margi Patel
 Files:
-        CustomerReview.php (class file)
-        customerreview.php
-        listCustomerReviews.php
-        listCustomerReviewsAdmin.php
-        deleteCustomerReviewAdmin.php
-        serviceproviderInterface.php
-        listCustomerReviews.css (css file)
+        CustomerReview.php (class file),
+        customerreview.php,
+        listCustomerReviews.php,
+        listCustomerReviewsAdmin.php,
+        deleteCustomerReviewAdmin.php,
+        serviceproviderInterface.php,
+        listCustomerReviews.css (css file),
         customerreview.css (css file)
 
 Screenshot:
