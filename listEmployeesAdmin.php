@@ -1,3 +1,5 @@
+
+<!--List of Employees Page at Admin Side (list of Employees) -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,62 +17,81 @@
 
 <body class="container" style="padding-left: 0px;
 padding-right: 0px; margin: 0 auto; width: 1200px;">
-<!-- header.php -->
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
+ <!-- header.php -->
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
-
-<!--List of Employees Page Admin Side (list of Employees) -->
-
-<!-- main -->
-<main id="listofemployees_admin_main">
-
-    <div class="wrapper">
-      <!-- Sidebar -->
-      <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/adminSidePanel.php'); ?>
+ <!-- main -->
+ <main id="listofemployees_admin_main">
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/adminSidePanel.php'); ?>
     <div class="container">
-
-
-  <h1>Employees</h1>
-<!-- Html part -->
-    
-
-
-<?php
-
-
-
-require_once 'database/Database.php';
-require_once 'class/Employee_client.php';
-
-
-$dbcon = Database::getDb();
-$e = new Employee_client();
-
-$myemp =  $e->getAllEmployees(Database::getDb());
-
-
-foreach($myemp as $employee){
-    echo "<ul class='list-group'>" .
-        "<li class='list-group-item'>" .  $employee->employee_firstname  . $employee->employee_lastname . 
-        // "<div>"."Position: " . $employee->job_title . "</div>" .
-        "<form action='deleteEmployeeAdmin.php' method='post'>".
-        "<input type='hidden' name = 'id' value='$employee->id' />" .
-        "<input type='submit' name='delete' value='Delete Employee' class='delete-button' />" .
-        "</form>" .
+      <h1 class="text-center">Employees</h1>
         
-        "</li>" .
-        "</ul>";
-      
-}
+        <table class="table">
+            <thead class="thead-dark">
+             <tr>
+              <th>Employee Name</th>
+              <th>Job Title</th>
+              <th>Address</th>
+              <!--<th>Skill Requirements</th>
+              <th>Job Requirements</th> -->
+              <!--<th>Description</th> -->
+              <th>Contact Info.</th>
+              <th>Avalibility</th>
+              <th> CRUD Features</th>
+             </tr>
+            </thead>
+            <tbody>   
 
-?>
-       
+        <?php
+            require_once 'database/Database.php';
+            require_once 'class/Employee_client.php';
+
+
+            $dbcon = Database::getDb();
+            $e = new Employee_client();
+            $myemp =  $e->getAllEmployeesWithDetails(Database::getDb()); //
+
+            //display all list of employee
+            foreach($myemp as $employee)
+            {
+                echo "" .  
+                        "<tr>" .
+
+                            //echo "<ul class='list-group'>" .
+                            //"<li class='list-group-item'>" .  
+                            "<td class='w-18'>" . $employee->employee_firstname . " " . $employee->employee_lastname . "</td>" .
+                                        // $employee->job_id  . 
+                            "<td>" . $employee->job_title . "</td>" .
+                            "<td>" . $employee->streetname . ", " . $employee->city . ", " . $employee->province . ", " . 
+                                        $employee->postal_code . "</td>".
+                            "<td>" . $employee->email_id . ", " . $employee->phone_no . "</td>" .
+                            "<td>" . $employee->availability . "</td>".
+                    
+                            "<td>" .
+                                     
+                            "<form action='deleteEmployeeAdmin.php' method='post'>".
+                            "<input type='hidden' name = 'id' value='$employee->id' />" .
+                            "<input type='submit' name='delete' value='Delete Employee'  class='btn btn-primary'/>" .
+                            "</form>" .
+
+                            //"</li>" .
+                            // "</ul>";
+                            "</td>" . 
+                    "</tr>";
+
+            }
+
+        ?>
+
         
-        
+        </tbody>
+        </table>
     </div>
-</div>
-    
-</main>
-    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
-    </body>
+   </div>
+  </main>
+  <!--footer-->
+  <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
+</body>
 </html>

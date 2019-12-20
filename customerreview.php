@@ -48,9 +48,11 @@ if(isset($_POST['addreview'])){
 
 
        if($c){
-           header('Location:  listCustomerReviews.php');
+           //header('Location:  listCustomerReviews.php');
            //echo("Added Successfully");
            //echo "Thank You " . $employee_f_name . " " . $employee_l_name . " for your Interest! We will response you soon on " . $email_id;
+           echo "<script> location.href='listCustomerReviews.php'; </script>";
+        exit;
        } else {
            echo "problem adding a customer review";
        }

@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,80 +22,50 @@ padding-right: 0px; margin: 0 auto; width: 1200px;">
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
 
-
-
 <!-- main -->
 <main id="listcustomerreviews_admin_main">
 <div class="wrapper">
  <!-- Sidebar -->
-      <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/adminSidePanel.php'); ?>
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/adminSidePanel.php'); ?>
 
 <div class="container">
-<div class="text-center">
-  <h1>Customer Reviews</h1>
-</div>
-<!-- Html part -->
+    <div class="container">
+     <div class="text-center">
+      <h1> Job Post</h1>
+     </div>    
 
-    
-<!--<div class="container-fluid">
-    
-    <div class="row">-->
-    
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th>Customer Name</th>
-            <th>Rating</th>
-            <th>Comment</th>
-            <th>Date</th>
-            
-            <th> CRUD Features</th>
-          </tr>
-        </thead>
-        <tbody>   
-       
+
 <?php
-require_once 'database/Database.php';
-require_once 'class/CustomerReview.php';
 
-$dbcon = Database::getDb();
-$r = new CustomerReview();
-$myreview =  $r->getAllCustomerReviews(Database::getDb());
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/JobPosition_admin.php');
 
 
-foreach($myreview as $review){
-    echo "" . 
-        "<tr>" .
+//get id
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
     
-         "<td class='w-18'>" .
-            
-              $review->customer_name  . "</td>" .
-            "<td>" . $review->rating .  "</td>" . 
-            "<td>" . $review->comment . "</td>" .
-            "<td>" . $review->date . "</td>" .
-            "<td>" .
-            "<form action='deleteCustomerReviewAdmin.php' method='post' class='form-horizontal'>".
-            "<input type='hidden' name = 'id' value='$review->id' />" .
-            "<input type='submit' name='delete' value='Delete Customer Review' class='btn btn-primary'/>" .
-            "</form>" .
-            "</td>" .
-          "</tr>";
-   
+    $dbcon = Database::getDb();
+    
+    $d = new JobPosition_admin();
+    $jobdetails = $d->getJobById($id,$dbcon);
 }
 
+echo   "<div>" .
+        "<h3>" . $jobdetails->job_title ."</h3>" . "<br>" .
+        "<b>" . "Location: ". "</b>" .$jobdetails->location_name  . "<br>" .
+        "<b>" . "Skill Requirements: " . "</b>" .$jobdetails->skill_requirements . "<br>". 
+        "<b>" . "Job Requirements: " . "</b>" .$jobdetails->job_requirements . "<br>". 
+        "<b>" . "Description: " . "</b>" .$jobdetails->description . "<br>" .
+        "<b>" . "Salary: " . "</b>" .$jobdetails->salary . "<br>". 
+        "<b>" . "Job Type: " . "</b>" .$jobdetails->job_type .
+      "</div>";
+
 ?>
-  
-</tbody>
-      </table>
-</div>
-    
-    </div>
-   
-</main>
-
- 
-   <!-- footer.php -->
-
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
-    </body>
+      </div>
+    </div></div>
+        </main>
+ <!--footer-->
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
+</body>
 </html>

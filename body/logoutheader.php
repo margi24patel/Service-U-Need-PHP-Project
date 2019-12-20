@@ -25,7 +25,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
 					<div class="box"><a href="blogPage.php">Blogs</a></div>
 				</div>
 				<div>
-					<div class="box"><a href="career_main_page.php">Careers</div>
+					<div class="box"><a href="careers.php">Careers</div>
 				</div>
 				<div id="#Professional">
 					<div class="box"><a href="#">Become A Professional</a></div>

@@ -108,10 +108,6 @@ Files:
         search.php
 
 
-Screenshot:
-
-
-
 
 Feature: Career 
 Author: Margi Patel
@@ -129,9 +125,6 @@ Files:
         addEmployeeForm.css (css file),
         careers.css (css file)
 
-Screenshot:
-
-
 
 
 
@@ -146,16 +139,6 @@ Files:
         serviceproviderInterface.php,
         listCustomerReviews.css (css file),
         customerreview.css (css file)
-
-Screenshot:
-
-
-
-
-
-
-
-
 
 
 

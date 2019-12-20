@@ -30,7 +30,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/Menu.php');
               <a class="nav-link" href="blogPage.php">Blogs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="career_main_page.php">Careers</a>
+              <a class="nav-link" href="careers.php">Careers</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Become A Professional</a>

@@ -55,15 +55,7 @@ class CustomerReview{
 
     }
     
-    //get customer review by review id
-  /*  public function getReviewById($id, $dbcon){
-        $sql = "SELECT * FROM customer_review where id = :id";
-        $pst = $dbcon->prepare($sql);
-        $pst->bindParam(':id', $id);
-        $pst->execute();
-        return $pst->fetch(PDO::FETCH_OBJ);
-    }
-    */
+   
     
     //to print service provider names in dropdown list (table service provider) 
     public function getAllServiceProvider($dbcon)
@@ -88,11 +80,17 @@ class CustomerReview{
     public function getAverageRating($dbcon){
         
         //$sql = "SELECT AVG(rating) AS rating FROM customer_review"; // this query will do average of total(all rate of ids) ratings 
-        $sql = "SELECT id, customer_name, service_provider_id, AVG(rating) AS rating, comment, date 
+        /*$sql = "SELECT id, customer_name, service_provider_id, AVG(rating) AS rating, comment, date 
                 FROM customer_review 
                 WHERE rating >= 3 
-                GROUP BY id";
-       
+                GROUP BY id";*/
+        //Reference: https://stackoverflow.com/questions/3492904/mysql-select-all-columns-from-one-table-and-some-from-another-table
+       $sql = "SELECT cr.id, customer_name, service_provider_id, AVG(rating) AS rating, comment, date , sp.name
+                FROM customer_review cr
+                JOIN service_providers sp
+                ON  cr.service_provider_id = sp.id
+                WHERE rating >= 3 
+                GROUP BY cr.id";
         
         $pdostm = $dbcon->prepare($sql); //prepare statement
 
@@ -106,13 +104,7 @@ class CustomerReview{
     
     public function getCountRatingServiceProvider($dbcon){
         
-        /*$sql = "SELECT id, client_id, customer_name, service_provider_id, AVG(rating) AS rating, comment, date 
-                FROM customer_review  cr
-                JOIN service_providers sp
-                ON cr.service_provider_id = sp.id"; */
-        /*$sql = "SELECT name FROM service_providers sp
-                JOIN customer_review cr
-                ON sp.id = cr.service_provider_id"; */
+       
        /* $sql = "SELECT customer_name, AVG(rating) AS rating, name
                 FROM customer_review cr
                 JOIN service_providers sp

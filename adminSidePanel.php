@@ -19,6 +19,9 @@
           </li> 
           <li class="active">
             <a href="listserviceproviders_admin.php">Service Providers</a>
-          </li>              
+          </li>
+          <li class="active">
+            <a href="listfaqs_admin.php">FAQ</a>
+          </li>               
         </ul>
       </nav>

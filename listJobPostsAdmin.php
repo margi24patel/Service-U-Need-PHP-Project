@@ -1,3 +1,5 @@
+
+<!--Display all JobPosts(list of Job Posts) at Admin Side -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,136 +17,116 @@
 
 <body class="container" style="padding-left: 0px;
 padding-right: 0px; margin: 0 auto; width: 1200px;">
-<!-- header.php -->
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
+ <!-- header.php -->
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
+<!--main-->
+ <main>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/adminSidePanel.php'); ?>
 
-<main>
-    <div class="text-center">
-     <h1>Positions</h1>
-    </div>
   
-<!-- Html part -->
-<div class='btn btn-primary'><a href="listEmployeesAdmin.php">List employees</a></div> 
-    
-<?php
+ 
+  <?php
 
-
-//require_once 'DatabaseEmployeesCareer.php';
-//require_once 'database/Database.php';    
-//require_once 'class/JobPosition_admin.php';
    require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');    
    require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/JobPosition_admin.php');
 
 
-$dbcon = Database::getDb();
-$j = new JobPosition_admin();
-$myjobposition =  $j->getAllJobPositions(Database::getDb());
+     $dbcon = Database::getDb(); //to get database connection
+     $j = new JobPosition_admin(); //create new instance of object
+     $myjobposition =  $j->getAllJobPositions(Database::getDb()); //call method getAllJobPositions()
 
 ?>
     
- <div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="bg-secondary">
-      <div class="sidebar-header ">
-        <h2>Admin Panel</h2>
-      </div>
-
-      <ul class="list-unstyled components">
-        <h3>Pages</h3>
-        <li class="active">
-          <a href="blogAdmin.php">Blogs</a>
-        </li>
-        <li class="active">
-          <a href="listJobPostsAdmin.php">Careers</a>
-        </li> 
-        <li class="active">
-          <a href="#serviceSubmenu">Services</a>
-        </li>
-        <li class="active">
-          <a href="listCustomerReviewsAdmin.php">Reviews</a>
-        </li>              
-      </ul>
-    </nav>
-
+  
     <div class="container">
-      <br/> 
+     <div class="text-center">
+      <h1>Positions</h1>
+     </div>    
+      <!--link for list of employees-->
+        <div class='text-center'>
+         <div class='btn btn-primary' style="margin-bottom:5px;text-decoration: none;" >
+            <a href="listEmployeesAdmin.php" style="color:white;">List employees</a>
+         </div>
+        </div>  
+        <!--add Job Postition Button -->
         <?php
-        //add Job Postition Button
-            echo      "<div class='text-center'>" .    
-                        "<form action='addJobPostAdmin.php' method='post' class='form-horizontal'>".
-                        "<input class='btn btn-primary' type='submit' name='add' value='Add Job Postition' />" .
-                        "</form>" .
             
-                        "</div>"; 
-?>
+            echo "<div class='text-center'>" .    
+                   "<form action='addJobPostAdmin.php' method='post' class='form-horizontal'>".
+                   "<input class='btn btn-primary' type='submit' name='add' value='Add Job Postition' />" .
+                   "</form>" .
+                   //"<div class='btn btn-primary' >" . "<a href='listEmployeesAdmin.php' style='color:white;'>" .
+                   // "List employees" . "</a>" . "</div>" .
+                   
+                  "</div>"; 
+        ?>
 
- <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th>Job Title</th>
-            <th>Location Name</th>
-            <th>Skill Requirements</th>
-            <th>Job Requirements</th>
-            <!--<th>Description</th> -->
-            <th>Salary</th>
-            <th>Job Type</th>
-            <th> CRUD Features</th>
-          </tr>
-        </thead>
-        <tbody>   
+         <table class="table">
+            <thead class="thead-dark">
+             <tr>
+              <th>Job Title</th>
+              <th>Location Name</th>
+              <!--<th>Skill Requirements</th>
+              <th>Job Requirements</th> -->
+              <!--<th>Description</th> -->
+              <th>Salary</th>
+              <th>Job Type</th>
+              <th> CRUD Features</th>
+             </tr>
+            </thead>
+            <tbody>   
     
-<?php
-        
-foreach($myjobposition as $position){
+             <?php
+                //display all list of Job Posts 
+                foreach($myjobposition as $position)
+                {
+                    echo "" .  
+                        "<tr>" .
 
-echo "" .  
-    "<tr>" .
-    
-         "<td class='w-18'>" . $position->job_title ."</td>" . 
-         "<td>" . $position->location_name . "</td>". 
-        "<td>" . $position->skill_requirements ."</td>". 
-        "<td>" . $position->job_requirements . "</td>". 
-        //"<td>" . $position->description . "</td>" .
-        "<td>" . $position->salary . "</td>". 
-        "<td>" . $position->job_type ."</td>" .
-        "<td>" .
-        //delete Button
-        
-            "<form action='deleteJobPostAdmin.php' method='post' class='form-horizontal'>".
-            "<input type='hidden' name = 'id' value='$position->id' />" .
-            "<input class='btn btn-primary' float-left' type='submit' name='delete' value='Delete' />" .
-            "</form>" .
-         
-        //edit Button
-        
-            "<form action='editJobPostAdmin.php' method='post' class='form-horizontal'>".
-            "<input type='hidden' name = 'id' value='$position->id' />" .
-            "<input class='btn btn-primary' float-right' type='submit' name='edit' value='Edit' />" .
-            "</form>" .
-        
-    "</td>" .
-          "</tr>";
-    
-}
-?>
+                             "<td class='w-18'>" . $position->job_title ."</td>" . 
+                             "<td>" . $position->location_name . "</td>". 
+                            //"<td>" . $position->skill_requirements ."</td>". 
+                            //"<td>" . $position->job_requirements . "</td>". 
+                            //"<td>" . $position->description . "</td>" .
+                            "<td>" . $position->salary . "</td>". 
+                            "<td>" . $position->job_type ."</td>" .
+                            "<td>" .
+                            //delete Button to delete Job Post
 
+                                "<form action='deleteJobPostAdmin.php' method='post' class='form-horizontal'>".
+                                "<input type='hidden' name = 'id' value='$position->id' />" .
+                                "<input class='btn btn-primary' float-left' type='submit' name='delete' value='Delete' style='margin-bottom:5px'/>" .
+                                "</form>" .
 
+                            //edit Button to edit Job Post
 
+                                "<form action='editJobPostAdmin.php' method='post' class='form-horizontal'>".
+                                "<input type='hidden' name = 'id' value='$position->id' />" .
+                                "<input class='btn btn-primary' float-right' type='submit' name='edit' value='Edit' style='margin-bottom:5px'/>" .
+                                "</form>" .
+                        
+                            //Details Button
+                                "<div class='deatils-job'>" .   
+                                "<form action='jobPostDetailsAdmin.php' method='get' class='form-horizontal'>".
+                                "<input type='hidden' name = 'id' value='$position->id' />" .
+                                "<input class='btn btn-primary' type='submit' name='details' value='Details' />" .
+                                "</form>" .
+                                "</div>" .
+                          "</td>" .
+                        "</tr>";
 
+                }
+             ?>
 
-        </tbody>
-      </table>
-        </div>
+         </tbody>
+        </table>
     </div>
-</main>
-
-
-    
-    
-   <!-- footer.php -->
-
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
-
+  </div>
+ </main>
+ <!-- footer.php -->
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
 </body>
 </html>

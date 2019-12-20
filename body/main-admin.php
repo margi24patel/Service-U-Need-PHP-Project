@@ -12,13 +12,13 @@
           <a href="blogAdmin.php">Blogs</a>
         </li>
         <li class="active">
-          <a href="#careerSubmenu">Careers</a>
+          <a href="listJobPostsAdmin.php">Careers</a>
         </li> 
         <li class="active">
           <a href="#serviceSubmenu">Services</a>
         </li>
         <li class="active">
-          <a href="#reviewSubmenu">Reviews</a>
+          <a href="listCustomerReviewsAdmin.php">Reviews</a>
         </li> 
         <li class="active">
           <a href="listfaqs_admin.php">FAQ</a>

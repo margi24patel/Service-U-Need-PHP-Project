@@ -25,7 +25,7 @@
               <a href="blogPage.php">Blogs</a>
             </p>
             <p>
-              <a href="customer_review.php">Reviews</a>
+              <a href="listCustomerReviews.php">Reviews</a>
             </p>
             <p>
               <a href="bookanappointment.php">Book An Appointment</a>
@@ -36,13 +36,13 @@
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
             <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
             <p>
-              <a href="career_main_page.php">Careers</a>
+              <a href="careers.php">Careers</a>
             </p>
             <p>
               <a href="faq.php">FAQ</a>
             </p>
             <p>
-              <a href="customer_review.php">Rate Us</a>
+              <a href="customerreview.php">Rate Us</a>
             </p>                        
           </div>          
 

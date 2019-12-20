@@ -1,4 +1,6 @@
 
+<!--Careers Page Which will display list of Job Post at client side -->
+<!--Employee can applay for Paricular Job Position -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,65 +18,84 @@
 
 <body class="container" style="padding-left: 0px;
 padding-right: 0px; margin: 0 auto; width: 1200px;">
+ <!-- header -->
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
 
-<!-- header -->
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
+ <!-- main -->
+ <main id="career_main">
+  <?php
 
+    require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
+    require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/JobPosition_admin.php');
 
-<!-- main -->
-<main id="career_main">
-<?php
+    $dbcon = Database::getDb(); //to get database connection
+    $j = new JobPosition_admin(); //create new instance of object
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/database/Database.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/class/JobPosition_admin.php');
+    $myjobposition =  $j->getAllJobPositions(Database::getDb()); //call method getAllJobPositions()
 
-$dbcon = Database::getDb();
-$j = new JobPosition_admin();
+  ?>
 
-$myjobposition =  $j->getAllJobPositions(Database::getDb());
-
-?>
-<!-- Html part -->
-<div class="text-center">
- <h1>Build the future of Services</h1>
-</div>  
-<div class="container-fluid">
-
- <div class="view overlay z-depth-1-half">
+ <div class="text-center">
+  <h1>Build the future of Services</h1>
+ </div>  
+ <div class="container-fluid">
+  <div class="view overlay z-depth-1-half">
     <img src="images/careerbanner.jpg" alt="Career Banner Image" class="card-img-top img-fluid">
     <div class="mask rgba-white-light"></div>
   </div>
   <p> we're looking for hard-working, passionate people to help us create the next million jobs in Canada.</p>
     <div class="text-center">
-    <h2>Open Positions</h2>
+     <h2>Open Positions</h2>
     </div>
     <div class="row">
-<?php 
-    foreach($myjobposition as $position){
-        echo "<div class='col-sm-6 col-md-6'>" . 
-                    "<h3>" . "Job Title: " .  $position->job_title . "</h3>" . "<br>".
-                        "<b>" . "Location Name: " . "</b>" . $position->location_name . "<br>".
-                        "<b>" . "Skill Requirements: " . "</b>" . $position->skill_requirements . "<br>".
-                        "<b>" . "Job Requirements: " . "</b>" .  $position->job_requirements . "<br>" .
-                        "<b>" . "Description: " . "</b>".  $position->description . "<br>" .    
-                        "<b>" . "Salary: " . "</b>" .  $position->salary . "<br>" .
-                        "<b>" . "Job Type: " . "</b>" .  $position->job_type .
+        <!--display all Job Post(Position)  -->
+        <?php 
+          /*  foreach($myjobposition as $position)
+            {
+                echo "<div class='col-sm-6 col-md-6'>" . 
+                            "<h3>" . "Job Title: " .  $position->job_title . "</h3>" . "<br>".
+                                "<b>" . "Location Name: " . "</b>" . $position->location_name . "<br>".
+                                "<b>" . "Skill Requirements: " . "</b>" . $position->skill_requirements . "<br>".
+                                "<b>" . "Job Requirements: " . "</b>" .  $position->job_requirements . "<br>" .
+                                "<b>" . "Description: " . "</b>".  $position->description . "<br>" .    
+                                "<b>" . "Salary: " . "</b>" .  $position->salary . "<br>" .
+                                "<b>" . "Job Type: " . "</b>" .  $position->job_type .
+
+                    "<div class='applay-job'>" .    
+                            "<form action='addEmployeeForm.php' method='post' class='form-horizontal'>".
+                            "<input type='hidden' name = 'id' value='$position->id' />" .
+                            "<input type='submit' name='apply' value='Apply for a Job' />" .
+                            "</form>" .
+                    "</div>" .
+                    "</div>";
+            } */
+        
+         foreach($myjobposition as $position){
+        echo "<div class='col-sm-3 col-md-4'>" . 
+                //    "<h3>" . "Job Title: " .  $position->job_title . "</h3>" . "<br>".
+                        /*"Location Name: " . $position->location_name . "<br>".
+                        "Skill Requirements: " .  $position->skill_requirements . "<br>".
+                        "Job Requirements: " .  $position->job_requirements . "<br>" .
+                        "Description: " .  $position->description . "<br>" .    
+                        "Salary: " .  $position->salary . "<br>" .
+                        "Job Type: " .  $position->job_type .*/
                     
-            "<div class='applay-job'>" .    
-                    "<form action='addEmployeeForm.php' method='post' class='form-horizontal'>".
+            "<div class='text-center'>" .    
+                    "<form action='jobDetails.php' method='get' class='form-horizontal'>".
                     "<input type='hidden' name = 'id' value='$position->id' />" .
-                    "<input type='submit' name='apply' value='Apply for a Job' />" .
+                    "<input type='submit' name='apply' value='$position->job_title' class='jobbtn'/>" .
                     "</form>" .
             "</div>" .
             "</div>";
     }
 
-?>
+
+        ?>
     </div>
-</div>
-</main>
-    	<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
-    </body>
-    <!-- footer -->
+  </div>
+ </main>
+ <!-- footer -->
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
+</body>
 </html>

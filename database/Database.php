@@ -6,7 +6,7 @@ class Database{
 	private static $user = 'root';
 	private static $pass = '';
 	private static $db = 'service_u_need';
-	private static $dsn = 'mysql:host=localhost;dbname=service_u_need';
+	private static $dsn = 'mysql:host=localhost;dbname=service_u_need_new';
 	private static $dbcon;
 
 

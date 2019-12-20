@@ -1,3 +1,5 @@
+
+<!--edit Job Post at Admin side-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,174 +17,159 @@
 
 <body class="container" style="padding-left: 0px;
 padding-right: 0px; margin: 0 auto; width: 1200px;">
-<!-- header.php -->
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
+ <!-- header.php -->
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/header.php'); ?>
 
-
-
-<!-- main -->
-<main id="editjobposition_admin_main">
-    <div class="wrapper">
-      <!-- Sidebar -->
-      <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/adminSidePanel.php'); ?>
+ <!-- main -->
+ <main id="editjobposition_admin_main">
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/adminSidePanel.php'); ?>
     <div class="container">
+      <h1 class="text-center">Edit Job Post</h1>
 
-    <h1>Edit Job Post</h1>
+        <?php
+        
+            require_once 'database/Database.php';
+            require_once 'class/JobPosition_admin.php';
+
+            //defining all variables
+            $job_title = $location_name = $skill_requirements = $job_requirements = $description = $salary = $job_type = "";
+
+            // to retrieve all data for that particular id 
+            if(isset($_POST['id'])){
+                $id = $_POST['id'];
+                $dbcon = Database::getDb();
+
+                $sql = "SELECT * FROM job_post_admin_side where id = :id";
+                $pst = $dbcon->prepare($sql);
+                $pst->bindParam(':id', $id);
+                $pst->execute();
+
+                $position = $pst->fetch(PDO::FETCH_OBJ);
+
+                $job_title =  $position->job_title;
+                $location_name = $position->location_name;
+                $skill_requirements = $position->skill_requirements;
+                $job_requirements = $position->job_requirements;
+                $description = $position->description;
+                $salary = $position->salary;
+                $job_type = $position->job_type;
 
 
-<?php
+            }
+            //if admin edit details it will update in the database(save the data in database)
+            if(isset($_POST['editjobposition'])){
+                $id = $_POST['pid'];
+                $job_title = $_POST['job_title'];
+                $location_name = $_POST['location_name'];
+                $skill_requirements = $_POST['skill_requirements'];
+                $job_requirements = $_POST['job_requirements'];
+                $description = $_POST['description'];
+                $salary = $_POST['salary'];
+                $job_type = $_POST['job_type'];
 
-//require_once 'DatabaseEmployeesCareer.php';
-require_once 'database/Database.php';
-require_once 'class/JobPosition_admin.php';
+        
+                $dbcon = Database::getDb(); //connection with database
+                $j = new JobPosition_admin(); //create a new instance of object
 
+                $count = $j->updateJobPosition($id, $job_title, $location_name, $skill_requirements, $job_requirements, $description, $salary, $job_type, $dbcon); //call method updateJobPosition 
 
-$job_title = $location_name = $skill_requirements = $job_requirements = $description = $salary = $job_type = "";
+                if($count){
+                   //header('Location:  listJobPostsAdmin.php');
+                    //echo "updated succesfully";
+                    //Reference: https://stackoverflow.com/questions/4871942/how-to-redirect-to-another-page-using-php
+                    echo "<script> location.href='listJobPostsAdmin.php'; </script>";
+                    exit;
+                } else {
+                    echo "problem";
+                }
+            }
 
-
-if(isset($_POST['id'])){
-    $id = $_POST['id'];
-    //$dbcon = DatabaseEmployeesCareer::getDb();
-    $dbcon = Database::getDb();
-
-    $sql = "SELECT * FROM job_post_admin_side where id = :id";
-    $pst = $dbcon->prepare($sql);
-    $pst->bindParam(':id', $id);
-    $pst->execute();
-
-    $position = $pst->fetch(PDO::FETCH_OBJ);
-
-    $job_title =  $position->job_title;
-    $location_name = $position->location_name;
-    $skill_requirements = $position->skill_requirements;
-    $job_requirements = $position->job_requirements;
-    $description = $position->description;
-    $salary = $position->salary;
-    $job_type = $position->job_type;
-    
-
-}
-if(isset($_POST['editjobposition'])){
-    $id = $_POST['pid'];
-    $job_title = $_POST['job_title'];
-    $location_name = $_POST['location_name'];
-    $skill_requirements = $_POST['skill_requirements'];
-    $job_requirements = $_POST['job_requirements'];
-    $description = $_POST['description'];
-    $salary = $_POST['salary'];
-    $job_type = $_POST['job_type'];
-    
-    //$dbcon = DatabaseEmployeesCareer::getDb();
-    $dbcon = Database::getDb();
-    $j = new JobPosition_admin();
-
-    $count = $j->updateJobPosition($id, $job_title, $location_name, $skill_requirements, $job_requirements, $description, $salary, $job_type, $dbcon);
-
-    if($count){
-       //header('Location:  listJobPostsAdmin.php');
-        //echo "updated succesfully";
-        //Reference: https://stackoverflow.com/questions/4871942/how-to-redirect-to-another-page-using-php
-        echo "<script> location.href='listJobPostsAdmin.php'; </script>";
-        exit;
-    } else {
-        echo "problem";
-    }
-}
-  
-
-?>
+        ?>
 
     
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="job_title"></label>
-        <div class="col-sm-6">
-            <input type="hidden" name="pid" value="<?= $id; ?>" class="form-control"/>  
+    <!-- Form -->
+    <form action="" method="post" class="form-horizontal">
+
+        <!-- id-->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="job_title"></label>
+                <div class="col-sm-6">
+                    <input type="hidden" name="pid" value="<?= $id; ?>" class="form-control"/>
+                </div>
         </div>
-    </div>
-    
-<!-- form -->
-<form action="" method="post" class="form-horizontal">
-    
-    <!-- id-->
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="job_title"></label>
-            <div class="col-sm-6">
-                <input type="hidden" name="pid" value="<?= $id; ?>" class="form-control"/>
+
+        <!-- Job Title -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="job_title"> Job Title:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="job_title" value="<?= $job_title; ?>" class="form-control"/>
             </div>
-    </div>
-    
-    <!-- Job Title -->
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="job_title"> Job Title:</label>
-            <div class="col-sm-6">
-                <input type="text" name="job_title" value="<?= $job_title; ?>" class="form-control"/>
         </div>
-    </div>
-    
-    <!-- Location Name -->
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="location_name"> Location Name:</label>
-            <div class="col-sm-6">
-                <input type="text" name="location_name" value="<?= $location_name; ?>" class="form-control"/>
+
+        <!-- Location Name -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="location_name"> Location Name:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="location_name" value="<?= $location_name; ?>" class="form-control"/>
+            </div>
         </div>
-    </div>
-    
-    
-    <!-- Skill Requirements -->
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="skill_requirements"> Skill Requirements:</label>
-            <div class="col-sm-6">
-                <input type="text" name="skill_requirements" value="<?= $skill_requirements; ?>" class="form-control"/>
+
+
+        <!-- Skill Requirements -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="skill_requirements"> Skill Requirements:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="skill_requirements" value="<?= $skill_requirements; ?>" class="form-control"/>
+            </div>
         </div>
-    </div>
-    
-    
-    <!-- Job Requirements-->
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="job_requirements"> Job Requirements:</label>
-           <div class="col-sm-6"> 
-               <input type="text" name="job_requirements" value="<?= $job_requirements; ?>" class="form-control"/>
+
+
+        <!-- Job Requirements-->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="job_requirements"> Job Requirements:</label>
+               <div class="col-sm-6"> 
+                   <input type="text" name="job_requirements" value="<?= $job_requirements; ?>" class="form-control"/>
+            </div>
         </div>
-    </div>
-    
-    <!-- Description -->
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="description"> Description: </label>
-             <div class="col-sm-6"> 
-                <input type="text" name="description" value="<?= $description; ?>" class="form-control"/>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="description"> Description: </label>
+                 <div class="col-sm-6"> 
+                    <input type="text" name="description" value="<?= $description; ?>" class="form-control"/>
+            </div>
         </div>
-    </div>
-    
-    <!-- Salary -->
-    <div class="form-group">
-         <label class="control-label col-sm-2" for="salary"> Salary:  </label>
-            <div class="col-sm-6"> 
-                <input type="text" name="salary" value="<?= $salary ?>" class="form-control"/>
+
+        <!-- Salary -->
+        <div class="form-group">
+             <label class="control-label col-sm-2" for="salary"> Salary:  </label>
+                <div class="col-sm-6"> 
+                    <input type="text" name="salary" value="<?= $salary ?>" class="form-control"/>
+            </div>
         </div>
-    </div>
-    
-    <!-- Job Type -->
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="job_type"> Job Type:  </label>
-            <div class="col-sm-6">
-                <input type="text" name="job_type" value="<?= $job_type ?>" class="form-control"/>
+
+        <!-- Job Type -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="job_type"> Job Type:  </label>
+                <div class="col-sm-6">
+                    <input type="text" name="job_type" value="<?= $job_type ?>" class="form-control"/>
+            </div>
         </div>
-    </div>
-    
-    
-    <!-- Edit Button-->
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-default" name="editjobposition" value="Edit Job Post">Submit</button>
+
+
+        <!-- Edit Button-->
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class='btn btn-primary' name="editjobposition" value="Edit Job Post">Submit</button>
+            </div>
         </div>
+    </form>
     </div>
-    
-  <!--  <input type="submit" name="editjobposition" value="Edit Job Post"> -->
-</form>
-</div>
-    </div>
-    
-</main>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
-    </body>
+  </div>
+ </main>
+ <!--footer-->
+ <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/project-merj-2019/body/footer.php'); ?>
+</body>
 </html>
